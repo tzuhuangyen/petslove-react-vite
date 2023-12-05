@@ -4,50 +4,51 @@ import datas from "./datas.json";
 
 //Tab Filter product component
 const Products = () => {
-  const [activeTab, setActiveTab] = useState("all");
+  // const [filterOrderType, setFilterOrderType] = useState("all"); // filter狀態變數
+  const [filterTab, setFilterTab] = useState("all"); //filter tab active
   const [products, setProducts] = useState(datas);
   const [sortType, setSortType] = useState("asc"); // 初始排序方式為升序
-  const [selectedCategory, setSelectedCategory] = useState("all"); // 新增一個狀態變數
   const [sortedAndFilteredProducts, setSortedAndFilteredProducts] = useState(
     []
   );
   const tabItems = ["pre-order", "in-stock", "customized", "all"];
-  //handle filter click
-  const handleTabClick = (tabType) => {
-    setActiveTab(tabType);
-    setSelectedCategory(
-      tabType === "pork" ||
-        tabType === "duck" ||
-        tabType === "chicken" ||
-        tabType === "beef" ||
-        tabType === "other"
-        ? tabType
-        : "all"
-    );
+  //handle filter by meat type click
+  const handleTabClick = (tabOrder) => {
+    console.log("Clicked tab:", tabOrder); // 檢查控制台輸出
+
+    setFilterTab(tabOrder);
   };
 
   // handle sort click
-  const handleSortType = (selectedSortType) => {
-    // 如果選擇的排序方式不是 "asc" 或 "desc"，則設定為預設值 "asc"
-    const validSortTypes = ["asc", "desc"];
-    setSortType(
-      validSortTypes.includes(selectedSortType) ? selectedSortType : "asc"
-    );
+  //hanle sort by typeof meat and price
+  const handleSortType = (selectedValue) => {
+    console.log("what meat be selected:", selectedValue); // 檢查控制台輸出
+
+    setSortType(selectedValue);
+    if (selectedValue === "asc" || selectedValue === "desc") {
+      setSortType(selectedValue);
+      // 如果是价格排序选项，只更新排序选项，不更新商品类型选项
+    } else {
+      // 如果是商品类型选项，更新商品类型选项，并将排序选项重置为默认值
+      setSortType(selectedValue);
+      setSortType("asc");
+    }
   };
+  const uniqueTypes = ["all", "chicken", "beef", "pork", "duck", "other"];
 
   const filterAndSortProducts = () => {
     let filteredProducts = products;
 
-    if (activeTab !== "all") {
+    if (filterTab !== "all") {
       filteredProducts = filteredProducts.filter(
-        (product) => product.order === activeTab
+        (product) => product.order === filterTab
       );
     }
-    if (selectedCategory !== "all") {
-      filteredProducts = filteredProducts.filter(
-        (product) => product.type === selectedCategory
-      );
-    }
+    // if (uniqueTypes !== "all") {
+    //   filteredProducts = filteredProducts.filter(
+    //     (product) => product.type === filterOrderType
+    //   );
+    // }
     if (sortType === "asc") {
       filteredProducts = filteredProducts.sort((a, b) => a.price - b.price);
     } else if (sortType === "desc") {
@@ -58,7 +59,7 @@ const Products = () => {
 
   useEffect(() => {
     filterAndSortProducts();
-  }, [sortType, activeTab, products]);
+  }, [sortType, filterTab, products]);
 
   // Card component: create a product card JSX(Product)
   const CreateDataCard = ({ data }) => {
@@ -107,27 +108,27 @@ const Products = () => {
           {/* Filter by order tab btn */}
           <nav className="filterTabs">
             <div className="nav nav-tabs" id="nav-tab" role="tablist">
-              {tabItems.map((tabType) => (
-                <div key={tabType} className={`nav-item`}>
+              {tabItems.map((tabOrder) => (
+                <div key={tabOrder} className={`nav-item`}>
                   <button
                     className={`nav-link ${
-                      activeTab === tabType ? "active" : ""
+                      filterTab === tabOrder ? "active" : ""
                     }`}
-                    id={`nav-${tabType}-tab`}
+                    id={`nav-${tabOrder}-tab`}
                     data-bs-toggle="tab"
-                    data-bs-target={`#nav-${tabType}`}
-                    type="button"
+                    data-bs-target={`#nav-${tabOrder}`}
+                    ㄟrder="button"
                     role="tab"
-                    aria-controls={`nav-${tabType}`}
-                    aria-selected={activeTab === tabType ? "true" : "false"}
-                    onClick={() => handleTabClick(tabType)}
+                    aria-controls={`nav-${tabOrder}`}
+                    aria-selected={filterTab === tabOrder ? "true" : "false"}
+                    onClick={() => handleTabClick(tabOrder)}
                   >
                     {/* Button content */}
-                    {tabType === "pre-order"
+                    {tabOrder === "pre-order"
                       ? "Pre-Order"
-                      : tabType === "in-stock"
+                      : tabOrder === "in-stock"
                       ? "In Stock"
-                      : tabType === "customized"
+                      : tabOrder === "customized"
                       ? "Customized"
                       : "All Products"}
                   </button>
@@ -154,21 +155,19 @@ const Products = () => {
               <option value="other">Other</option>
             </select>
           </div>
-
-          {/* btnTabs for filtering */}
         </div>
 
         {/* Filter by order result content */}
         <div className="tab-content" id="nav-tabContent">
-          {tabItems.map((tabType) => (
+          {tabItems.map((tabOrder) => (
             <div
-              key={tabType}
+              key={tabOrder}
               className={`tab-pane fade ${
-                activeTab === tabType ? "active show" : ""
+                filterTab === tabOrder ? "active show" : ""
               }`}
-              id={`nav-${tabType}`}
+              id={`nav-${tabOrder}`}
               role="tabpanel"
-              aria-labelledby={`nav-${tabType}-tab`}
+              aria-labelledby={`nav-${tabOrder}-tab`}
             >
               <div className="row">
                 {sortedAndFilteredProducts.map((product) => (

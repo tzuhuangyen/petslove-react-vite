@@ -1,19 +1,24 @@
-/* eslint-disable react/no-unescaped-entities */
-// import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import { Routes, Route } from "react-router-dom";
 import Header from "./components/header/Header";
-import SubscriptionForm from "./components/SubscriptionForm";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Products from "./pages/products/Products";
+import SubscriptionForm from "./pages/SubscriptionForm";
 import Footer from "./components/footer/Footer";
-import Products from "./components/products/Products";
 function App() {
   return (
     <>
       <div>
-        <h1>Yen's project with Vite + React</h1>
         <Header />
-        <Products />
-        <SubscriptionForm />
+        <h1>Yen's project Vite + React</h1>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/subscriptionForm" element={<SubscriptionForm />} />
+        </Routes>
         <Footer />
       </div>
     </>

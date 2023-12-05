@@ -1,13 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import "./header.css";
 import logo from "/images/Logo.png";
-import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
+//import Button from "react-bootstrap/Button";
+// Form from "react-bootstrap/Form";
+//import Nav from "react-bootstrap/Nav";
+//import Navbar from "react-bootstrap/Navbar";
+// NavDropdown from "react-bootstrap/NavDropdown";
 
 //search box component
 const SearchBox = ({ text, onSearchHandler }) => {
@@ -51,9 +52,9 @@ function Header() {
               <div className="logo-search d-flex justify-content-between align-items-center">
                 {/*<!-- logo -->*/}
                 <h1 className="logo d-flex align-items-center animate__animated animate__backInLeft animate__slow">
-                  <a href="index.html">
+                  <Link to="/">
                     <img src={logo} alt="logo" /> Pets snack
-                  </a>
+                  </Link>
                 </h1>
                 {/*<!-- //search+search icon -->*/}
                 <div className="search d-flex align-items-center">
@@ -81,28 +82,29 @@ function Header() {
                   >
                     <ul className="navbar-nav">
                       <li className="nav-item">
-                        <a
+                        <Link
                           className="nav-link"
                           aria-current="page"
                           href="index.html"
+                          to="/about"
                         >
                           About
-                        </a>
+                        </Link>
                       </li>
                       <li className="nav-item">
-                        <a className="nav-link" href="products.html">
-                          Shop
-                        </a>
+                        <Link className="nav-link" to="./products">
+                          products
+                        </Link>
                       </li>
                       <li className="nav-item">
-                        <a className="nav-link" href="blog.html">
+                        <Link className="nav-link" to="/blog">
                           Blog{" "}
-                        </a>
+                        </Link>
                       </li>
                       <li className="nav-item">
-                        <a className="nav-link" href="contact.html">
+                        <Link className="nav-link" to="/subscriptionForm">
                           Contact{" "}
-                        </a>
+                        </Link>
                       </li>
                     </ul>
                   </div>
@@ -128,24 +130,27 @@ function Header() {
                     aria-labelledby="dropdownMenuLink"
                   >
                     <li>
-                      <a className="dropdown-item" href="index.html">
+                      <Link className="dropdown-item" to="/about">
                         About
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a className="dropdown-item" href="products.html">
+                      <Link className="dropdown-item" to="/products">
                         Shop
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a className="dropdown-item" href="blog.html">
+                      <Link className="dropdown-item" to="/blog">
                         Blog
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a className="dropdown-item" href="contact.html">
+                      <Link
+                        className="dropdown-item"
+                        to="/src/pages/SubscriptionForm.jsx"
+                      >
                         Contact
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </div>
