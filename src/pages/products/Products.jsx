@@ -3,6 +3,14 @@
 //filter meats
 //sort price
 
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { far } from "@fortawesome/free-regular-svg-icons";
+library.add(fab, fas, far);
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+
 import React, { useState, useEffect } from "react";
 import "./products.css";
 import datas from "./datas.json";
@@ -10,13 +18,14 @@ import datas from "./datas.json";
 const SearchBox = ({ text, onSearchHandler }) => {
   return (
     <>
-      <label htmlFor="search">search</label>
+      <label htmlFor="search"></label>
       <input
         id="search"
         type="text"
         className="form-control"
         value={text}
         onChange={onSearchHandler}
+        placeholder="search...type of meat"
       />
     </>
   );
@@ -132,7 +141,10 @@ const Products = () => {
                 type="button"
                 className="btn btn-sm btn-outline-secondary"
               >
-                add
+                <FontAwesomeIcon
+                  icon={faShoppingCart}
+                  style={{ color: "gray" }}
+                />
               </button>
             </div>
           </div>
