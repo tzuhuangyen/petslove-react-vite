@@ -1,65 +1,113 @@
+//search box
+//filter orders
+//filter meats
+//sort price
+
 import React, { useState, useEffect } from "react";
 import "./products.css";
 import datas from "./datas.json";
+//search box
+const SearchBox = ({ text, onSearchHandler }) => {
+  return (
+    <>
+      <label htmlFor="search">search</label>
+      <input
+        id="search"
+        type="text"
+        className="form-control"
+        value={text}
+        onChange={onSearchHandler}
+      />
+    </>
+  );
+};
 
 //Tab Filter product component
 const Products = () => {
+  const [text, setText] = useState("");
+
   // const [filterOrderType, setFilterOrderType] = useState("all"); // filter狀態變數
   const [filterTab, setFilterTab] = useState("all"); //filter tab active
-  const [products, setProducts] = useState(datas);
-  const [sortType, setSortType] = useState("asc"); // 初始排序方式為升序
-  const [sortedAndFilteredProducts, setSortedAndFilteredProducts] = useState(
-    []
-  );
-  const tabItems = ["pre-order", "in-stock", "customized", "all"];
-  //handle filter by meat type click
-  const handleTabClick = (tabOrder) => {
-    console.log("Clicked tab:", tabOrder); // 檢查控制台輸出
+  const [sortPrice, setSortPrice] = useState("asc"); // 初始排序方式為升序
+  const [allProducts, setAllProducts] = useState(datas);
 
+  const [filteredProducts, setFilteredProducts] = useState([]);
+
+  const tabItems = ["pre-order", "in-stock", "customized", "all"];
+  {
+    /* console.log(datas.filter((data) => data.type.toLowerCase().includes("ch")));
+     */
+  }
+  //search handler
+  const onSearchHandler = (e) => {
+    console.log(e.target.value);
+    setText(e.target.value);
+  };
+
+  // Use useEffect to set the initial state when the component mounts
+  {
+    /*useEffect(() => {
+    setFilteredProducts(
+      allProducts.toSorted((a, b) => {
+        return sortPrice === "asc" ? a.price - b.price : b.price - a.price;
+      })
+    );
+  }, [sortPrice, allProducts]);*/
+  }
+  useEffect(() => {
+    // Filter and sort based on the search input, filter tab, and sort option
+    const filteredAndSortedProducts = allProducts
+      .filter((product) =>
+        product.type.toLowerCase().includes(text.toLowerCase())
+      )
+      .filter((product) =>
+        filterTab === "all" ? true : product.order === filterTab
+      )
+      .sort((a, b) =>
+        sortPrice === "asc" ? a.price - b.price : b.price - a.price
+      );
+
+    setFilteredProducts([...filteredAndSortedProducts]);
+  }, [text, filterTab, sortPrice, allProducts]);
+  //handle filter by order type click
+  const handleTabClick = (tabOrder) => {
+    console.log("Clicked tab:", tabOrder);
     setFilterTab(tabOrder);
+
+    {
+      /*if (tabOrder === "all") {
+      setFilteredProducts(
+        datas.toSorted((a, b) => {
+          return sortPrice === "asc" ? a.price - b.price : b.price - a.price;
+        })
+      );
+    } else {
+      setFilteredProducts(
+        datas
+          .filter((item) => item.order === tabOrder)
+          .toSorted((a, b) => {
+            return sortPrice === "asc" ? a.price - b.price : b.price - a.price;
+          })
+      );
+    }
+  */
+    }
   };
 
   // handle sort click
   //hanle sort by typeof meat and price
-  const handleSortType = (selectedValue) => {
-    console.log("what meat be selected:", selectedValue); // 檢查控制台輸出
+  const handleSortPrice = (selectedSortPrice) => {
+    console.log("what meat be selected:", selectedSortPrice); // 檢查控制台輸出
+    setSortPrice(selectedSortPrice);
 
-    setSortType(selectedValue);
-    if (selectedValue === "asc" || selectedValue === "desc") {
-      setSortType(selectedValue);
-      // 如果是价格排序选项，只更新排序选项，不更新商品类型选项
-    } else {
-      // 如果是商品类型选项，更新商品类型选项，并将排序选项重置为默认值
-      setSortType(selectedValue);
-      setSortType("asc");
+    {
+      /*setFilteredProducts((products) =>
+      products.toSorted((a, b) =>
+        selectedSortPrice === "asc" ? a.price - b.price : b.price - a.price
+      )
+    );*/
     }
   };
-  const uniqueTypes = ["all", "chicken", "beef", "pork", "duck", "other"];
-
-  const filterAndSortProducts = () => {
-    let filteredProducts = products;
-
-    if (filterTab !== "all") {
-      filteredProducts = filteredProducts.filter(
-        (product) => product.order === filterTab
-      );
-    }
-    // if (uniqueTypes !== "all") {
-    //   filteredProducts = filteredProducts.filter(
-    //     (product) => product.type === filterOrderType
-    //   );
-    // }
-    if (sortType === "asc") {
-      filteredProducts = filteredProducts.sort((a, b) => a.price - b.price);
-    } else if (sortType === "desc") {
-      filteredProducts = filteredProducts.sort((a, b) => b.price - a.price);
-    }
-    setSortedAndFilteredProducts(filteredProducts);
-  };
-
-  useEffect(() => {
-    filterAndSortProducts();
-  }, [sortType, filterTab, products]);
 
   // Card component: create a product card JSX(Product)
   const CreateDataCard = ({ data }) => {
@@ -73,26 +121,19 @@ const Products = () => {
             style={{ height: "170px" }}
           />
           <div className="card-body">
-            <p className="card-text">{data.order}</p>
             <p className="card-text">{data.name}</p>
-            <p className="card-text">Price: ${data.price}</p>
             <p className="card-text">Type: {data.type}</p>
-            <div className="d-flex justify-content-between align-items-center">
-              <div className="btn-group">
-                <button
-                  type="button"
-                  className="btn btn-sm btn-outline-secondary"
-                >
-                  View
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-sm btn-outline-secondary"
-                >
-                  Edit
-                </button>
+            <div className="d-flex justify-content-between align-end  ">
+              <div className="d-flex flex-dir-col ">
+                <p className="card-text">${data.price}</p>
+                <p className="card-text">{data.order}</p>
               </div>
-              <small className="text-muted">9 mins</small>
+              <button
+                type="button"
+                className="btn btn-sm btn-outline-secondary"
+              >
+                add
+              </button>
             </div>
           </div>
         </div>
@@ -103,7 +144,8 @@ const Products = () => {
   return (
     <>
       <div className="container">
-        {/* Filter by order */}
+        <SearchBox text={text} onSearchHandler={onSearchHandler} />
+        {/* Filter by order tab*/}
         <div className="filternSort btns d-flex justify-content-between align-items-center">
           {/* Filter by order tab btn */}
           <nav className="filterTabs">
@@ -117,7 +159,7 @@ const Products = () => {
                     id={`nav-${tabOrder}-tab`}
                     data-bs-toggle="tab"
                     data-bs-target={`#nav-${tabOrder}`}
-                    ㄟrder="button"
+                    order="button"
                     role="tab"
                     aria-controls={`nav-${tabOrder}`}
                     aria-selected={filterTab === tabOrder ? "true" : "false"}
@@ -136,7 +178,6 @@ const Products = () => {
               ))}
             </div>
           </nav>
-          {/* btnTabs for sorted */}
           {/* Sort dropdown */}
           <div className=" sortBtn">
             <label htmlFor="sortSelect">Sort:</label>
@@ -144,19 +185,13 @@ const Products = () => {
               id="sortSelect"
               className="filterSelect"
               defaultValue={"increase"}
-              onChange={(e) => handleSortType(e.target.value)}
+              onChange={(e) => handleSortPrice(e.target.value)}
             >
-              <option value="asc">High to Low </option>
-              <option value="desc">Low to High</option>
-              <option value="pork">Pork</option>
-              <option value="duck">Duck</option>
-              <option value="chicken">Chicken</option>
-              <option value="beef">Beef</option>
-              <option value="other">Other</option>
+              <option value="asc">Low to High </option>
+              <option value="desc"> High to Low</option>
             </select>
           </div>
         </div>
-
         {/* Filter by order result content */}
         <div className="tab-content" id="nav-tabContent">
           {tabItems.map((tabOrder) => (
@@ -170,7 +205,7 @@ const Products = () => {
               aria-labelledby={`nav-${tabOrder}-tab`}
             >
               <div className="row">
-                {sortedAndFilteredProducts.map((product) => (
+                {filteredProducts.map((product) => (
                   <CreateDataCard key={product.id} data={product} />
                 ))}
               </div>

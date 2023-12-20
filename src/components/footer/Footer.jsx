@@ -1,6 +1,5 @@
 import React from "react";
 import "./footer.css";
-import logo from "/images/Logo.png";
 import fb from "/images/fb.png";
 import line from "/images/line.png";
 import ig from "/images/ig.png";
@@ -15,7 +14,7 @@ const Footer = () => {
           <div className="container-lg d-flex justify-content-between align-items-center">
             <h1 className="logo">
               <a href="index.html">
-                <img src={logo} alt="logo" /> Pet's snack
+                <img src="/images/Logo.png" alt="logo" /> Pet's snack
               </a>
             </h1>
             <ul className="social d-flex ">

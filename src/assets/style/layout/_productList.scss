@@ -1,0 +1,44 @@
+// 手機版
+.products {
+  margin-bottom: 40px;
+  h2 {
+    font-size: 1.75rem;
+    margin-top: 40px;
+    margin-bottom: 32px;
+    img {
+      width: 28px;
+    }
+    @include media-breakpoint-up(lg) {
+      font-size: 56px;
+      margin-top: 80px;
+      margin-bottom: 40px;
+      img {
+        width: 56px;
+      }
+    }
+  }
+  .card {
+    border-radius: 16px;
+    border: 1px solid transparent;
+    &:hover {
+      border: 1px solid $primary;
+    }
+    .card-img-top {
+      border-radius: 16px;
+      width: 320px;
+      height: 200px;
+    }
+  }
+  .viewBtn {
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+// 桌機 筆電版
+.allProduct {
+  .card-img-top {
+    height: 180px;
+  }
+}

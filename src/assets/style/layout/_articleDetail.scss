@@ -1,0 +1,31 @@
+.articleDetail {
+  .card {
+    margin-top: 16px;
+    border: none;
+  }
+  .card-title {
+    font-size: 12px;
+  }
+  li {
+    margin-bottom: 16px;
+  }
+}
+.share {
+  font-size: 14px;
+}
+
+.moreArticles {
+  .card {
+    border: 1px solid transparent;
+    margin-bottom: 16px;
+    &:hover {
+      color: $primary;
+      cursor: pointer;
+    }
+    .moreBtn {
+      &:hover {
+        color: black;
+      }
+    }
+  }
+}

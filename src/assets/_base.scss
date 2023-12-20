@@ -1,0 +1,37 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+img {
+  vertical-align: middle;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+//增加點擊範圍
+a {
+  display: block;
+  text-decoration: none;
+  color: white;
+  display: block;
+
+  &:hover {
+    color: gray;
+  }
+}
+
+h2 {
+  font-size: $h2-font-size; //56px
+  color: $textDark;
+  line-height: 67px;
+}
+
+h3 {
+  font-size: $h3-font-size; //40px
+  color: $textDark;
+}

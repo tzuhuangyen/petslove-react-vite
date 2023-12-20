@@ -1,0 +1,171 @@
+header {
+  background-color: $primary;
+  width: 100%;
+  position: sticky;
+  right: 0;
+  top: 0;
+  z-index: 99;
+  .container {
+    padding-top: 14px;
+    padding-bottom: 14px;
+    @include media-breakpoint-up(md) {
+      max-width: 720px;
+    }
+    @include media-breakpoint-up(lg) {
+      max-width: 960px;
+    }
+  }
+}
+.logo-search {
+  flex-grow: 1;
+  @include media-breakpoint-up(md) {
+    flex-grow: 0;
+  }
+}
+.logo {
+  margin-bottom: 0;
+  // margin-right: 275px;
+  @include media-breakpoint-up(md) {
+    margin-right: 24px;
+  }
+  a {
+    font-size: 18px;
+    @include media-breakpoint-up(lg) {
+      font-size: 28px;
+    }
+    color: $textDark;
+    img {
+      max-width: 42px;
+      height: 32px;
+      @include media-breakpoint-up(lg) {
+        max-width: 70px;
+        height: 52px;
+      }
+    }
+    // @include pc {
+    //   margin-right: 24px;
+    //   a {
+    //     color: $textDark;
+    //     img {
+    //       width: 70px;
+    //       height: 54px;
+    //     }
+    //   }
+    // }
+  }
+}
+
+.search {
+  .searchIcon {
+    @include media-breakpoint-up(md) {
+      margin-left: 0;
+    }
+    @include media-breakpoint-up(lg) {
+      margin-left: 10px;
+    }
+  }
+  form {
+    display: none;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+//search space
+.search {
+  // margin-left: 140px;
+  @include media-breakpoint-up(md) {
+    margin-left: 0;
+  }
+  .form-control {
+    width: 240px;
+    height: 32px;
+    border-radius: 16px;
+    padding: 0;
+    @include media-breakpoint-up(lg) {
+      border-radius: 15px;
+    }
+  }
+}
+
+//search icon
+.material-symbols-outlined {
+  color: $white;
+}
+.navbar-light .navbar-nav .nav-link {
+  color: $white;
+  padding: 0;
+}
+
+// header-導覽列
+.navbar {
+  padding-top: 0;
+  padding-bottom: 0;
+  .navbar-nav {
+    @include media-breakpoint-up(md) {
+      flex-direction: row;
+    }
+    .nav-item {
+      @include media-breakpoint-up(md) {
+        &:not(:last-child) {
+          margin-right: 4px;
+        }
+      }
+      @include media-breakpoint-up(lg) {
+        &:not(:last-child) {
+          margin-right: 32px;
+        }
+        a {
+          font-size: 20px;
+          line-height: 24px;
+        }
+      }
+    }
+  }
+}
+
+// 漢堡選單的按鈕
+.navBtn {
+  padding-top: 5px;
+}
+// 手機下拉式選單dropdown
+.dropdown-menu {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  // max-height: 0px;
+  //.dropdown-menu 設定的 max-height: 0px; 會導致選單點擊後無法順利展開，移除這段後就可以正常運行囉～
+  text-align: center;
+  transition: all 0.8s;
+  overflow: hidden;
+  background-color: #f9d6e2;
+}
+
+.dropdown.active {
+  max-height: 200px;
+}
+.dropdown {
+  padding-left: 0;
+  li {
+    list-style: none;
+  }
+}
+
+.dropdown li a {
+  display: block;
+  background: #faf8f8;
+  color: #473f3d;
+  border-top: 1px solid #ffffff;
+  padding: 16px 0;
+  text-decoration: none;
+  text-align: center;
+}
+.dropdown li a:hover {
+  background: $primary;
+}
+.dropdown-toggle::after {
+  display: none;
+}

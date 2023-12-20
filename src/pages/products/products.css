@@ -4,7 +4,13 @@
 }
 .d-flex {
   display: flex;
-  flex-wrap: wrap;
+}
+.align-end {
+  align-items: end;
+}
+
+.flex-dir-col {
+  flex-direction: column;
 }
 .container {
   max-width: 960px;
@@ -19,7 +25,9 @@
   max-width: 30%;
   padding: 8px;
 }
-
+.card {
+  padding: 0;
+}
 /* @media (max-width: 768px) {
     .products {
       max-width: 33.33%;

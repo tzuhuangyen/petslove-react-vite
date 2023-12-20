@@ -1,0 +1,571 @@
+//--------start of banner -------
+//container
+.banner {
+  top: 80px;
+  background-color: #f7f3ec;
+  .container {
+    height: 375px;
+    @include media-breakpoint-up(md) {
+      max-width: 720px;
+    }
+    @include media-breakpoint-up(lg) {
+      max-width: 960px;
+      height: 715px;
+    }
+  }
+}
+.slogan {
+  @include media-breakpoint-up(md) {
+    padding-left: 320px;
+    padding-top: 70px;
+  }
+  @include media-breakpoint-up(lg) {
+    padding-left: 550px;
+    padding-top: 110px;
+  }
+  img {
+    @include media-breakpoint-up(md) {
+      width: 20px;
+    }
+  }
+  span {
+    color: $primary;
+    @include media-breakpoint-up(md) {
+      font-size: 14px;
+    }
+  }
+  .footprintBig1 {
+    top: 500px;
+    left: 10px;
+
+    img {
+      width: 50px;
+      transform: rotate(320deg);
+    }
+  }
+  .footprintBig2 {
+    top: 420px;
+    left: -50px;
+
+    img {
+      width: 50px;
+      transform: rotate(320deg);
+    }
+  }
+}
+// dog&cat
+.bannerDog {
+  width: 300px;
+  top: 65px;
+  @include media-breakpoint-up(lg) {
+    width: 520px;
+    left: 0;
+    top: 70px;
+  }
+}
+.bannerDogWhiteFrame {
+  width: 327px;
+  top: 58px;
+  left: -5px;
+
+  @include media-breakpoint-up(lg) {
+    width: 520px;
+    top: 60px;
+    left: -6px;
+  }
+}
+
+.bannerDogFrameOrange {
+  width: 310px;
+  top: 75px;
+  left: 5px;
+  @include media-breakpoint-up(lg) {
+    width: 530px;
+    top: 83px;
+    left: -5px;
+  }
+}
+.bannerCatFrame {
+  top: 200px;
+  right: 20px;
+  width: 140px;
+  @include media-breakpoint-up(md) {
+    top: 230px;
+    right: 30px;
+    width: 150px;
+  }
+  @include media-breakpoint-up(lg) {
+    width: 320px;
+    top: 285px;
+    right: -5px;
+  }
+}
+.bannerCat {
+  top: 200px;
+  right: 20px;
+  width: 120px;
+  @include media-breakpoint-up(md) {
+    top: 240px;
+    right: 30px;
+    width: 140px;
+  }
+  @include media-breakpoint-up(lg) {
+    width: 310px;
+    top: 290px;
+    right: 0;
+  }
+}
+
+//footprint
+.banner {
+  .footprint1 {
+    top: 10px;
+    left: 40px;
+    transform: rotate(45deg);
+    @include media-breakpoint-up(lg) {
+      top: 500px;
+      left: -40px;
+      transform: rotate(330deg);
+    }
+  }
+  .footprint2 {
+    top: 50px;
+    left: 18px;
+    transform: rotate(330deg);
+    @include media-breakpoint-up(lg) {
+      top: 630px;
+      left: 20px;
+    }
+  }
+  .footprint3 {
+    @include media-breakpoint-up(md) {
+      top: 400px;
+      left: 545px;
+    }
+  }
+  .footprint4 {
+    @include media-breakpoint-up(lg) {
+      top: 380px;
+      left: 600px;
+    }
+  }
+  .footprint5 {
+    @include media-breakpoint-up(lg) {
+      top: 460px;
+      left: 550px;
+    }
+  }
+  .footprint6 {
+    @include media-breakpoint-up(lg) {
+      top: 490px;
+      left: 480px;
+    }
+  }
+}
+
+//slogan-sm
+.slogan-sm {
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 80px;
+  p {
+    margin-bottom: 0;
+  }
+  span {
+    font-size: 21px;
+  }
+  img {
+    width: 20px;
+  }
+}
+// -------end of banner--------
+
+// -------start of about-------
+// about jc
+// about title
+.about {
+  text-align: center;
+  margin-bottom: 40px;
+  h2 {
+    font-size: 1.75rem;
+    margin-bottom: 32px;
+  }
+  img {
+    width: 28px;
+  }
+}
+.about {
+  .card {
+    width: 100%;
+    border: none;
+    margin-bottom: 24px;
+    img {
+      width: 160px;
+    }
+  }
+}
+
+// about-lg
+// about1
+.about-lg {
+  h2 {
+    margin-top: 80px;
+    margin-bottom: 40px;
+    img {
+      width: 56px;
+    }
+  }
+  .card {
+    border: none;
+  }
+  .card-body1 {
+    position: relative;
+    background-color: #faf8f8;
+    margin-top: 100px;
+    margin-bottom: 64px;
+    margin-left: 50px;
+    padding-left: 240px;
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+  .aboutImg1 {
+    position: absolute;
+    top: -60px;
+    left: -75px;
+  }
+}
+
+// about2
+.about-lg {
+  .card-body2 {
+    position: relative;
+    background-color: #faf8f8;
+    margin-top: 150px;
+    margin-right: 50px;
+    padding-left: 4px;
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+  .aboutImg2 {
+    position: absolute;
+    top: -70px;
+    right: -50px;
+  }
+}
+
+// about3
+.about-lg {
+  margin-bottom: 80px;
+  .card-body3 {
+    position: relative;
+    background-color: #faf8f8;
+    margin-top: 150px;
+    padding-left: 290px;
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+  .aboutImg3 {
+    position: absolute;
+    top: -60px;
+    left: -15px;
+  }
+}
+// -------end of about-------
+
+// -------start of types-------
+.types {
+  padding-bottom: 24px;
+  background-color: #f7f3ec;
+  h2 {
+    padding-top: 40px;
+    margin-bottom: 32px;
+    font-size: 1.75rem;
+    @include media-breakpoint-up(lg) {
+      font-size: 56px;
+      padding-top: 80px;
+      margin-bottom: 40px;
+    }
+    img {
+      width: 28px;
+      @include media-breakpoint-up(lg) {
+        width: 56px;
+      }
+    }
+  }
+  .card-img-overlay {
+    height: 270px;
+    top: 15%;
+  }
+  .card-title {
+    text-align: center;
+    background-color: $primary;
+    opacity: 0.9;
+    font-size: 32px;
+    padding: 16px;
+  }
+  .card-body {
+    text-align: center;
+    img {
+      width: 18px;
+    }
+    @include media-breakpoint-up(lg) {
+      margin-top: 16px;
+      margin-bottom: 24px;
+    }
+    .btn {
+      background-color: #f9d6e2;
+      border-radius: 70px;
+      padding: 10px 24px;
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+  }
+}
+
+.types {
+  .card {
+    width: 100%;
+    background-color: #f7f3ec;
+    @include media-breakpoint-up(md) {
+      max-width: 70%;
+    }
+    @include media-breakpoint-up(lg) {
+      max-width: 32%;
+    }
+
+    .card-img,
+    .card-img-top {
+      height: 235px;
+    }
+    .card-title {
+      @include media-breakpoint-up(md) {
+        font-size: 34px;
+      }
+    }
+  }
+}
+// -------end of types-------
+
+// -------start of review-------
+.review {
+  h2 {
+    margin-top: 40px;
+    margin-bottom: 32px;
+    font-size: 1.75rem;
+    @include media-breakpoint-up(md) {
+      font-size: 3rem;
+    }
+    img {
+      width: 28px;
+      @include media-breakpoint-up(md) {
+        width: 56px;
+      }
+    }
+  }
+}
+
+.reviewSwiper {
+  .card {
+    align-items: center;
+    border: none;
+    height: auto;
+  }
+  .review-cardBody {
+    position: relative;
+    right: 0;
+    background-color: $secondary;
+    border-radius: 24px 24px 24px 0;
+    @include media-breakpoint-up(md) {
+      border-radius: 24px;
+    }
+    &:after {
+      content: "";
+      position: absolute;
+      right: calc(50% - 12px);
+      bottom: -18px;
+      transform: rotate(90deg);
+      width: 0;
+      height: 0;
+      border-width: 12px 0 12px 12px;
+      border-style: solid;
+      border-color: transparent transparent transparent $secondary;
+      @include media-breakpoint-up(md) {
+        left: 183px;
+      }
+    }
+  }
+  .reviewPetPic {
+    position: absolute;
+    top: -30%;
+    right: 20%;
+    width: 80px;
+    height: 100px;
+    border-radius: 50%;
+
+    @include media-breakpoint-up(md) {
+      top: 95%;
+      left: 30%;
+      width: 90px;
+      height: 110px;
+    }
+  }
+  .reviewFoodPic {
+    width: 320px;
+    height: auto;
+    @include media-breakpoint-up(md) {
+      height: 270px;
+      width: 100%;
+    }
+  }
+}
+
+.btn {
+  background-color: #f9d6e2;
+  border-radius: 70px;
+  padding: 10px 24px;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+// 先把預設的左右箭頭設為空值
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  content: "";
+}
+// 再重新設定左右箭頭大小顏色
+.swiper {
+  &-button-next,
+  &-button-prev {
+    position: initial;
+    width: 24px;
+    height: 24px;
+    margin-top: 0;
+    color: $primary;
+  }
+}
+// 綠色點點分頁位置reset
+.swiper-pagination {
+  position: unset;
+  width: auto !important;
+
+  //桌機版 左右箭頭＋點點分頁位置設定
+  .swiper-button {
+    bottom: 30%;
+    left: 35%;
+    transform: translateX(-50%);
+    z-index: 1;
+  }
+  // 手機版左右箭頭＋點點分頁位置設定
+  .swiper-control {
+    position: absolute;
+    transform: none;
+    bottom: 0px;
+    left: 150px;
+  }
+
+  // 點點
+  .swiper-pagination-bullet {
+    background-color: $primary;
+    opacity: initial;
+    // 分頁點點點及後的效果
+    &-active {
+      width: 16px;
+      border-radius: 100px;
+    }
+  }
+}
+
+// -------end of review-------
+
+// ------start of knowPet
+.knowPets {
+  background-color: #f7f3ec;
+  h2 {
+    @include media-breakpoint-up(md) {
+      margin-top: 40px;
+    }
+
+    margin-bottom: 32px;
+    font-size: 1.75rem;
+    img {
+      width: 28px;
+    }
+  }
+  .card {
+    min-width: 100%;
+    box-shadow: 0px 4px 24px 0px #0000001a;
+    border-radius: 16px;
+    margin-bottom: 24px;
+    border: 1px solid transparent;
+    &:hover {
+      border: 1px solid $primary;
+      transform: scale(1.1);
+    }
+
+    img {
+      height: 200px;
+      border-radius: 16px;
+    }
+    .card-body {
+      .card-title {
+        font-size: 24px;
+        color: $primary;
+      }
+    }
+  }
+  ul {
+    margin-bottom: 40px;
+    padding-left: 0;
+  }
+}
+// ------end of knowPet
+
+// ------start lg of knowPet
+.knowPets-lg {
+  background-color: #f7f3ec;
+
+  h2 {
+    padding-top: 56px;
+    margin-bottom: 40px;
+    img {
+      width: 28px;
+      @include media-breakpoint-up(md) {
+        width: 56px;
+      }
+    }
+  }
+  .card {
+    border: none;
+    margin-bottom: 40px;
+    border: 1px solid transparent;
+    &:hover {
+      border: 1px solid $primary;
+    }
+    img {
+      width: 370px;
+      height: 230px;
+      border-radius: 16px;
+      @include media-breakpoint-up(md) {
+        padding-top: 18px;
+      }
+    }
+  }
+  .card-body {
+    .card-title {
+      color: $primary;
+      font-size: 32px;
+      margin-top: 8px;
+    }
+  }
+  .moreBtn {
+    color: $primary;
+    display: flex;
+    justify-content: flex-end;
+    &:hover {
+      color: black;
+    }
+  }
+}

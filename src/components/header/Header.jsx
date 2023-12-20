@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import "./header.css";
-import logo from "/images/Logo.png";
 import Container from "react-bootstrap/Container";
 //import Button from "react-bootstrap/Button";
 // Form from "react-bootstrap/Form";
@@ -29,7 +28,7 @@ const SearchBox = ({ text, onSearchHandler }) => {
 };
 //search input function
 const SearchInput = () => {
-  const [text, setText] = useState();
+  const [text, setText] = useState("");
 
   const onSearchHandler = (e) => {
     console.log(e.target.value);
@@ -53,7 +52,7 @@ function Header() {
                 {/*<!-- logo -->*/}
                 <h1 className="logo d-flex align-items-center animate__animated animate__backInLeft animate__slow">
                   <Link to="/">
-                    <img src={logo} alt="logo" /> Pets snack
+                    <img src="/images/Logo.png" alt="logo" /> Pet's snack
                   </Link>
                 </h1>
                 {/*<!-- //search+search icon -->*/}
@@ -81,6 +80,16 @@ function Header() {
                     id="navbarNav"
                   >
                     <ul className="navbar-nav">
+                      <li className="nav-item">
+                        <Link
+                          className="nav-link"
+                          aria-current="page"
+                          href="index.html"
+                          to="/"
+                        >
+                          Home
+                        </Link>
+                      </li>
                       <li className="nav-item">
                         <Link
                           className="nav-link"
