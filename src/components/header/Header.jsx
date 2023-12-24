@@ -115,6 +115,15 @@ function Header() {
                           Contact{" "}
                         </Link>
                       </li>
+                      <button
+                        className="btn btn-outline-dark position-relative"
+                        type="submit"
+                      >
+                        cart
+                        <span className="badge bg-danger position-absolute top-0 start-100 translate-middle">
+                          99
+                        </span>
+                      </button>
                     </ul>
                   </div>
                 </nav>

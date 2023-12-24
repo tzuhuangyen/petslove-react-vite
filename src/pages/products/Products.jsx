@@ -121,13 +121,13 @@ const Products = () => {
   // Card component: create a product card JSX(Product)
   const CreateDataCard = ({ data }) => {
     return (
-      <div key={data.id} className="products col-lg-3 ">
-        <div className="card mb-4 shadow-sm">
+      <div className="col-4">
+        <div key={data.id} className="card mb-4 shadow-sm">
           <img
             src={data.img_url}
             className="card-img-top object-fit "
             alt="product"
-            style={{ height: "170px" }}
+            style={{ height: "200px" }}
           />
           <div className="card-body">
             <p className="card-text">{data.name}</p>
@@ -217,9 +217,14 @@ const Products = () => {
               aria-labelledby={`nav-${tabOrder}-tab`}
             >
               <div className="row">
-                {filteredProducts.map((product) => (
-                  <CreateDataCard key={product.id} data={product} />
-                ))}
+                <div className="col-md-9">
+                  <div className="row g-3">
+                    {filteredProducts.map((product) => (
+                      <CreateDataCard key={product.id} data={product} />
+                    ))}
+                  </div>
+                </div>
+                <div className="col-md-3"></div>
               </div>
             </div>
           ))}

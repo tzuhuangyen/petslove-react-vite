@@ -21,10 +21,7 @@
 .object-fit {
   object-fit: cover;
 }
-.products {
-  max-width: 30%;
-  padding: 8px;
-}
+
 .card {
   padding: 0;
 }
