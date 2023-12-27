@@ -7,7 +7,11 @@ import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter
+      basename={
+        process.env.NODE_ENV === "production" ? "/petslove-react-vite/" : "/"
+      }
+    >
       <App />
     </BrowserRouter>
   </React.StrictMode>
