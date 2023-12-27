@@ -10,7 +10,7 @@ import IndexBanner from "./pages/index/IndexBanner";
 import Products from "./pages/products/Products";
 import SubscriptionForm from "./pages/SubscriptionForm";
 import Footer from "./components/footer/Footer";
-
+import Login from "./pages/member/member";
 function App() {
   return (
     <div className="App">
@@ -22,6 +22,7 @@ function App() {
         </Route>
         <Route path="/about" element={<About />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/subscriptionForm" element={<SubscriptionForm />} />
       </Routes>
 

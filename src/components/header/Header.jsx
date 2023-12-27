@@ -115,6 +115,11 @@ function Header() {
                           Contact{" "}
                         </Link>
                       </li>
+                      <li className="nav-item">
+                        <Link className="nav-link" to="/login">
+                          Login{" "}
+                        </Link>
+                      </li>
                       <button
                         className="btn btn-outline-dark position-relative"
                         type="submit"
