@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import "./header.css";
 import Container from "react-bootstrap/Container";
+import user from "/images/user.png";
 //import Button from "react-bootstrap/Button";
 // Form from "react-bootstrap/Form";
 //import Nav from "react-bootstrap/Nav";
@@ -117,18 +118,9 @@ function Header() {
                       </li>
                       <li className="nav-item">
                         <Link className="nav-link" to="/login">
-                          Login{" "}
+                          <img src={user} alt="user" />{" "}
                         </Link>
                       </li>
-                      <button
-                        className="btn btn-outline-dark position-relative"
-                        type="submit"
-                      >
-                        cart
-                        <span className="badge bg-danger position-absolute top-0 start-100 translate-middle">
-                          99
-                        </span>
-                      </button>
                     </ul>
                   </div>
                 </nav>

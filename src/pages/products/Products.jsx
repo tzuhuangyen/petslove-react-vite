@@ -13,7 +13,8 @@ import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 
 import React, { useState, useEffect } from "react";
 import "./products.css";
-import datas from "./datas.json";
+import axios from "axios";
+
 //search box
 const SearchBox = ({ text, onSearchHandler }) => {
   return (
@@ -30,23 +31,20 @@ const SearchBox = ({ text, onSearchHandler }) => {
     </>
   );
 };
-
-//Tab Filter product component
+//Tab Filter product Component
 const Products = () => {
+  const [jsonData, setJsonData] = useState([]);
   const [text, setText] = useState("");
 
   // const [filterOrderType, setFilterOrderType] = useState("all"); // filter狀態變數
   const [filterTab, setFilterTab] = useState("all"); //filter tab active
   const [sortPrice, setSortPrice] = useState("asc"); // 初始排序方式為升序
-  const [allProducts, setAllProducts] = useState(datas);
+  // const [allProducts, setAllProducts] = useState(datas);
 
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   const tabItems = ["pre-order", "in-stock", "customized", "all"];
-  {
-    /* console.log(datas.filter((data) => data.type.toLowerCase().includes("ch")));
-     */
-  }
+
   //search handler
   const onSearchHandler = (e) => {
     console.log(e.target.value);
@@ -54,16 +52,20 @@ const Products = () => {
   };
 
   // Use useEffect to set the initial state when the component mounts
-  {
-    /*useEffect(() => {
-    setFilteredProducts(
-      allProducts.toSorted((a, b) => {
-        return sortPrice === "asc" ? a.price - b.price : b.price - a.price;
-      })
-    );
-  }, [sortPrice, allProducts]);*/
-  }
   useEffect(() => {
+    (async () => {
+      try {
+        const datas = await axios.get("http://localhost:3000/products");
+        console.log(datas);
+        setJsonData(datas.data);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
+  //update state
+  {
+    /*  useEffect(() => {
     // Filter and sort based on the search input, filter tab, and sort option
     const filteredAndSortedProducts = allProducts
       .filter((product) =>
@@ -77,7 +79,8 @@ const Products = () => {
       );
 
     setFilteredProducts([...filteredAndSortedProducts]);
-  }, [text, filterTab, sortPrice, allProducts]);
+  }, [text, filterTab, sortPrice, allProducts]);*/
+  }
   //handle filter by order type click
   const handleTabClick = (tabOrder) => {
     console.log("Clicked tab:", tabOrder);
@@ -103,7 +106,6 @@ const Products = () => {
     }
   };
 
-  // handle sort click
   //hanle sort by typeof meat and price
   const handleSortPrice = (selectedSortPrice) => {
     console.log("what meat be selected:", selectedSortPrice); // 檢查控制台輸出
@@ -155,8 +157,19 @@ const Products = () => {
 
   return (
     <>
+      {/*JSON.stringify(jsonData)*/}
       <div className="container">
+        <button
+          className="btn btn-outline-dark position-relative"
+          type="submit"
+        >
+          cart
+          <span className="badge bg-danger position-absolute top-0 start-100 translate-middle">
+            99
+          </span>
+        </button>
         <SearchBox text={text} onSearchHandler={onSearchHandler} />
+
         {/* Filter by order tab*/}
         <div className="filternSort btns d-flex justify-content-between align-items-center">
           {/* Filter by order tab btn */}
@@ -219,9 +232,9 @@ const Products = () => {
               <div className="row">
                 <div className="col-md-9">
                   <div className="row g-3">
-                    {filteredProducts.map((product) => (
-                      <CreateDataCard key={product.id} data={product} />
-                    ))}
+                    {jsonData.map((data) => {
+                      return <CreateDataCard key={data.id} data={data} />;
+                    })}
                   </div>
                 </div>
                 <div className="col-md-3"></div>

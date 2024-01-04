@@ -1,4 +1,6 @@
-function IndexBanner() {
+import About from "./About";
+
+function Index() {
   return (
     <>
       <section className="banner">
@@ -141,7 +143,8 @@ function IndexBanner() {
           </div>
         </div>
       </section>
+      <About />
     </>
   );
 }
-export default IndexBanner;
+export default Index;
