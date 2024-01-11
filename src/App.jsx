@@ -1,14 +1,14 @@
-import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/scss/bootstrap.scss";
 import "./assets/all.scss";
 import { Routes, Route } from "react-router-dom";
 
-import Header from "./components/header/Header";
-import Home from "./pages/Home";
+import Header from "./components/Header";
+// import Home from "./pages/Home";
 import Index from "./pages/index/Index";
-import Products from "./pages/products/Products";
+import Products from "./pages/Products";
 import SubscriptionForm from "./pages/SubscriptionForm";
-import Footer from "./components/footer/Footer";
-// import Register from "./pages/logSignin/Register";
+import Footer from "./components/Footer";
+import Register from "./pages/logSignin/Register";
 import Login from "./pages/logSignin/LoginForm";
 import Blog from "./pages/Blog";
 function App() {
@@ -24,6 +24,7 @@ function App() {
         <Route path="/products" element={<Products />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/subscriptionForm" element={<SubscriptionForm />} />
       </Routes>
 

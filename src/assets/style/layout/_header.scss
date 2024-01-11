@@ -16,6 +16,7 @@ header {
     }
   }
 }
+
 .logo-search {
   flex-grow: 1;
   @include media-breakpoint-up(md) {
@@ -168,4 +169,28 @@ header {
 }
 .dropdown-toggle::after {
   display: none;
+}
+
+/* navbar */
+.logo {
+  margin: 8px;
+}
+.logo a {
+  font-size: 18px;
+  color: #250f0a;
+}
+form {
+  margin-right: 8px;
+}
+form input::placeholder {
+  font-size: 12px;
+}
+form .form-control {
+  padding: 6px;
+  margin-top: 8px;
+}
+
+.userIcon {
+  width: 20px;
+  background-color: #f4aa9a;
 }

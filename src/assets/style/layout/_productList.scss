@@ -42,3 +42,59 @@
     height: 180px;
   }
 }
+
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+.d-flex {
+  display: flex;
+}
+.align-end {
+  align-items: end;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.object-fit {
+  object-fit: cover;
+}
+
+.card {
+  padding: 0;
+}
+.btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  .btnCart {
+    border-radius: 50%;
+    padding: 5px 10px;
+    background-color: #f9d6e2;
+  }
+  .btnHeart {
+    border-radius: 50%;
+    padding: 5px 10px;
+    background-color: #f9d6e2;
+  }
+}
+
+/* @media (max-width: 768px) {
+    .products {
+      max-width: 33.33%;
+    }
+  } */
+/* @media (max-width: 576px) {
+    .products {
+      max-width: 100%;
+    }
+  } */
+.typeBtns {
+  button {
+    margin-right: 4px;
+  }
+}

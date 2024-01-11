@@ -1,88 +1,128 @@
 {
+  "users": [
+    {
+      "id": "1",
+      "email": "yyy@hotmail.com",
+      "password": 123456
+    },
+    {
+      "email": "zzz@hotmail.com",
+      "password": "123456",
+      "id": "6ahShwk"
+    },
+    {
+      "email": "zzz@hotmail.com",
+      "password": "123456",
+      "id": "kWrDt0T"
+    },
+    {
+      "email": "xxx@hotmail.com",
+      "password": "123456",
+      "id": "VRl_lxA"
+    },
+    {
+      "email": "aaa@hotmail.com",
+      "password": "123456",
+      "id": "-lh332a"
+    },
+    {
+      "email": "bbb@hotmail.com",
+      "password": "123456",
+      "id": "zOB0y_K"
+    },
+    {
+      "email": "ccc@hotmail.com",
+      "password": "123456",
+      "id": "PgBMpo-"
+    },
+    {
+      "email": "aaa@hotmail.com",
+      "password": "123456",
+      "id": "utr1P2D"
+    }
+  ],
   "products": [
     {
       "id": "1",
-      "name": "Pet Snack 1",
+      "name": "Pet chicken 1",
       "img_url": "/images/proddetail-1.jpg",
       "price": 10.99,
-      "type": "chicken",
-      "order": "pre-order"
+      "meat": "chicken",
+      "order": "order"
     },
-
     {
       "id": "2",
-      "name": "Pet Snack 2",
+      "name": "Pet beef 2",
       "img_url": "/images/proddetail-2.jpg",
       "price": 12.99,
-      "type": "beef",
+      "meat": "beef",
       "order": "in-stock"
     },
     {
       "id": "3",
-      "name": "Pet Snack 3",
+      "name": "Pet pork 3",
       "img_url": "/images/proddetail-3.png",
       "price": 8.49,
-      "type": "pork",
+      "meat": "pork",
       "order": "in-stock"
     },
     {
       "id": "4",
-      "name": "Pet Snack 4",
+      "name": "Pet duck 4",
       "img_url": "/images/proddetail-4.jpg",
       "price": 15.99,
-      "type": "duck",
+      "meat": "duck",
       "order": "customized"
     },
     {
       "id": "5",
-      "name": "Pet Snack 5",
+      "name": "Pet chicken 5",
       "img_url": "/images/proddetail-5.jpg",
       "price": 9.99,
-      "type": "chicken",
+      "meat": "chicken",
       "order": "customized"
     },
     {
       "id": "6",
-      "name": "Pet Snack 6",
+      "name": "Pet beef 6",
       "img_url": "/images/proddetail-6.jpg",
       "price": 11.49,
-      "type": "beef",
+      "meat": "beef",
       "order": "in-stock"
     },
     {
       "id": "7",
-      "name": "Pet Snack 7",
+      "name": "Pet pork 7",
       "img_url": "/images/proddetail-7.jpg",
       "price": 13.99,
-      "type": "pork",
+      "meat": "pork",
       "order": "in-stock"
     },
     {
       "id": "8",
-      "name": "Pet Snack 8",
+      "name": "Pet duck 8",
       "img_url": "/images/proddetail-8.jpg",
       "price": 14.49,
-      "type": "duck",
-      "order": "pre-order"
+      "meat": "duck",
+      "order": "order"
     },
     {
       "id": "9",
-      "name": "Pet Snack 9",
+      "name": "Pet chicken 9",
       "img_url": "/images/proddetail-9.jpg",
       "price": 7.99,
-      "type": "chicken",
-      "order": "pre-order"
+      "meat": "chicken",
+      "order": "order"
     },
     {
       "id": "10",
-      "name": "Pet Snack 10",
+      "name": "Pet customized 10",
       "img_url": "/images/proddetail-10.jpg",
       "price": 16.99,
-      "type": "other",
+      "meat": "other",
       "order": "customized"
     }
   ],
-
   "cart": [
     {
       "id": "1",

@@ -1,6 +1,6 @@
 import React from "react";
 
-function About() {
+const About = () => {
   return (
     <div>
       {/*<!-- about jc of mobile-->*/}
@@ -60,17 +60,17 @@ function About() {
         </div>
       </section>
       {/*<!--about jc of md&lg -->*/}
-      <div className="about-lg container">
+      <section className="about-lg container d-none d-md-block">
         <h2 className="text-center" data-aos="zoom-in" data-aos-duration="1200">
           <span>
             <img src="/images/footprint.png" alt="before" />
           </span>
           about
           <span>
-            <img src="/images/footprint.png" alt="" />{" "}
+            <img src="/images/footprint.png" alt="" />
           </span>
         </h2>
-        <div>
+        <div className="aboutCard">
           <div
             className="card-body1"
             data-aos="zoom-in-left"
@@ -86,7 +86,7 @@ function About() {
             </p>
           </div>
         </div>
-        <div>
+        <div className="aboutCard">
           <div
             className="card-body2"
             data-aos="zoom-in-right"
@@ -103,7 +103,7 @@ function About() {
             </p>
           </div>
         </div>
-        <div>
+        <div className="aboutCard">
           <div
             className="card-body3"
             data-aos="zoom-in"
@@ -119,10 +119,10 @@ function About() {
             </p>
           </div>
         </div>
-      </div>
+      </section>
       {/*!-- -------end of about------- --*/}
     </div>
   );
-}
+};
 
 export default About;

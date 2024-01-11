@@ -1,14 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import "./header.css";
 import Container from "react-bootstrap/Container";
-import user from "/images/user.png";
-//import Button from "react-bootstrap/Button";
-// Form from "react-bootstrap/Form";
-//import Nav from "react-bootstrap/Nav";
-//import Navbar from "react-bootstrap/Navbar";
-// NavDropdown from "react-bootstrap/NavDropdown";
+import { FaRegUser } from "react-icons/fa";
 
 //search box component
 const SearchBox = ({ text, onSearchHandler }) => {
@@ -91,16 +85,7 @@ function Header() {
                           Home
                         </Link>
                       </li>
-                      <li className="nav-item">
-                        <Link
-                          className="nav-link"
-                          aria-current="page"
-                          href="index.html"
-                          to="/about"
-                        >
-                          About
-                        </Link>
-                      </li>
+
                       <li className="nav-item">
                         <Link className="nav-link" to="./products">
                           products
@@ -118,7 +103,7 @@ function Header() {
                       </li>
                       <li className="nav-item">
                         <Link className="nav-link" to="/login">
-                          <img src={user} alt="user" />{" "}
+                          <FaRegUser />
                         </Link>
                       </li>
                     </ul>
@@ -144,11 +129,6 @@ function Header() {
                     className="dropdown-menu"
                     aria-labelledby="dropdownMenuLink"
                   >
-                    <li>
-                      <Link className="dropdown-item" to="/about">
-                        About
-                      </Link>
-                    </li>
                     <li>
                       <Link className="dropdown-item" to="/products">
                         Shop

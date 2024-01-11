@@ -1,5 +1,4 @@
 import React from "react";
-import "./footer.css";
 import fb from "/images/fb.png";
 import line from "/images/line.png";
 import ig from "/images/ig.png";
