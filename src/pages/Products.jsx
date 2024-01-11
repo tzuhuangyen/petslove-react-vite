@@ -2,138 +2,123 @@
 //filter orders
 //filter meats
 //sort price
-
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { FaCartPlus, FaHeart } from "react-icons/fa";
 import { CiShoppingCart } from "react-icons/ci";
 
-import React, { useState, useEffect } from "react";
-//search box
-const SearchBox = ({ text, onSearchHandler }) => {
-  return (
-    <>
-      <label htmlFor="search"></label>
-      <input
-        id="search"
-        type="text"
-        className="form-control"
-        value={text}
-        onChange={onSearchHandler}
-        placeholder="search...type of meat"
-      />
-    </>
-  );
-};
-
-//Tab Filter product component
 const Products = () => {
-  const [text, setText] = useState("");
+  //取得原始資料
+  const [jsonData, setJsonData] = useState();
+  //search
+  const [text, setText] = useState([]);
+  //filter
+  const [productTypes, setProductTypes] = useState([]);
 
-  // const [filterOrderType, setFilterOrderType] = useState("all"); // filter狀態變數
-  const [filterTab, setFilterTab] = useState("all"); //filter tab active
-  const [sortPrice, setSortPrice] = useState("asc"); // 初始排序方式為升序
-  const [allProducts, setAllProducts] = useState(datas);
+  //sort price
+  // const [sortPrice, setSortPrice] = useState("asc");
 
-  const [filteredProducts, setFilteredProducts] = useState([]);
-
-  const tabItems = ["pre-order", "in-stock", "customized", "all"];
-  {
-    /* console.log(datas.filter((data) => data.type.toLowerCase().includes("ch")));
-     */
-  }
-  //search handler
-  const onSearchHandler = (e) => {
-    console.log(e.target.value);
-    setText(e.target.value);
-  };
-
-  // Use useEffect to set the initial state when the component mounts
-  {
-    /*useEffect(() => {
-    setFilteredProducts(
-      allProducts.toSorted((a, b) => {
-        return sortPrice === "asc" ? a.price - b.price : b.price - a.price;
-      })
-    );
-  }, [sortPrice, allProducts]);*/
-  }
+  // 取得jsonData資料 Use useEffect to set the initial state when the component mounts
   useEffect(() => {
-    // Filter and sort based on the search input, filter tab, and sort option
-    const filteredAndSortedProducts = allProducts
-      .filter((product) =>
-        product.type.toLowerCase().includes(text.toLowerCase())
-      )
-      .filter((product) =>
-        filterTab === "all" ? true : product.order === filterTab
-      )
-      .sort((a, b) =>
-        sortPrice === "asc" ? a.price - b.price : b.price - a.price
-      );
+    (async () => {
+      try {
+        const datas = await axios.get("http://localhost:3000/products");
+        setJsonData(datas.data);
+        setProductTypes(datas.data);
+        console.log("jsonData:", datas.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    })();
+  }, []);
 
-    setFilteredProducts([...filteredAndSortedProducts]);
-  }, [text, filterTab, sortPrice, allProducts]);
+  //search box component
+  const SearchBox = () => {
+    //search handler
+    const onSearchHandler = (event) => {
+      const productKeyword = event.target.value;
+
+      if (productKeyword !== "") {
+        const filteredProducts = jsonData.filter((product) => {
+          return (
+            product.name.toLowerCase().includes(productKeyword.toLowerCase()) ||
+            product.type.toLowerCase().includes(productKeyword.toLowerCase())
+          );
+        });
+        setProductTypes(filteredProducts);
+      } else {
+        setProductTypes(jsonData);
+      }
+    };
+
+    return (
+      <>
+        <div className="mb-3">
+          <label htmlFor="search"></label>
+          <input
+            id="search"
+            type="search"
+            className="form-control"
+            value={text}
+            onChange={onSearchHandler}
+            placeholder="search..."
+          />
+        </div>
+      </>
+    );
+  };
+
   //handle filter by order type click
-  const handleTabClick = (tabOrder) => {
-    console.log("Clicked tab:", tabOrder);
-    setFilterTab(tabOrder);
+  const handleFilters = (type) => {
+    let filteredTypes;
 
-    {
-      /*if (tabOrder === "all") {
-      setFilteredProducts(
-        datas.toSorted((a, b) => {
-          return sortPrice === "asc" ? a.price - b.price : b.price - a.price;
-        })
-      );
+    if (type !== "") {
+      filteredTypes = jsonData.filter((productType) => {
+        return productType.order === type || productType.type === type;
+      });
+      setProductTypes(filteredTypes);
+      console.log("filteredTypes", filteredTypes);
     } else {
-      setFilteredProducts(
-        datas
-          .filter((item) => item.order === tabOrder)
-          .toSorted((a, b) => {
-            return sortPrice === "asc" ? a.price - b.price : b.price - a.price;
-          })
-      );
-    }
-  */
+      setProductTypes(jsonData);
+      console.log("Data:", jsonData);
     }
   };
 
-  // handle sort click
-  //hanle sort by typeof meat and price
-  const handleSortPrice = (selectedSortPrice) => {
-    console.log("what meat be selected:", selectedSortPrice); // 檢查控制台輸出
-    setSortPrice(selectedSortPrice);
+  //hanle sort by price
+  //將過濾後的產品productTypes或全部產品依價錢排序
+  // const handleSortPrice = () => {
+  //   const sortedProducts = [...productTypes];
 
-    {
-      /*setFilteredProducts((products) =>
-      products.toSorted((a, b) =>
-        selectedSortPrice === "asc" ? a.price - b.price : b.price - a.price
-      )
-    );*/
-    }
-  };
-
+  //   sortedProducts.sort((a, b) =>
+  //     sortPrice === "asc" ? b.price - a.price : a.price - b.price
+  //   );
+  //   setProductTypes(sortedProducts);
+  //   setSortPrice((prevSort) => (prevSort === "asc" ? "desc" : "asc"));
+  // };
   // Card component: create a product card JSX(Product)
-  const CreateDataCard = ({ data }) => {
+  const CreateDataCard = ({ productType }) => {
     return (
       <div className="col-4">
-        <div key={data.id} className="card mb-4 shadow-sm">
+        <div className="card mb-4 shadow-sm" key={productType.id}>
           <img
-            src={data.img_url}
+            src={productType.img_url}
             className="card-img-top object-fit "
             alt="product"
             style={{ height: "200px" }}
           />
           <div className="card-body">
-            <p className="card-text">{data.name}</p>
-            <p className="card-text">Type: {data.type}</p>
+            <p className="card-title">{productType.name}</p>
+            <p className="card-text">Type: {productType.type}</p>
             <div className="d-flex justify-content-between align-end  ">
-              <div className="d-flex flex-dir-col ">
-                <p className="card-text">${data.price}</p>
-                <p className="card-text">{data.order}</p>
-              </div>
-              <button
-                type="button"
-                className="btn btn-sm btn-outline-secondary"
-              >
-                <CiShoppingCart />
+              <span className="card-text">{productType.order}</span>
+              <p className="card-text">${productType.price}</p>
+            </div>
+            <div className="btns">
+              <button type="button" className=" btnHeart">
+                <FaHeart color="black" />
+              </button>
+              <button type="button" className=" btnCart">
+                <FaCartPlus color="black" />
               </button>
             </div>
           </div>
@@ -144,41 +129,51 @@ const Products = () => {
 
   return (
     <>
+      {/*JSON.stringify(productTypes)*/}
       <div className="container">
-        <SearchBox text={text} onSearchHandler={onSearchHandler} />
-        {/* Filter by order tab*/}
-        <div className="filternSort btns d-flex justify-content-between align-items-center">
-          {/* Filter by order tab btn */}
-          <nav className="filterTabs">
-            <div className="nav nav-tabs" id="nav-tab" role="tablist">
-              {tabItems.map((tabOrder) => (
-                <div key={tabOrder} className={`nav-item`}>
-                  <button
-                    className={`nav-link ${
-                      filterTab === tabOrder ? "active" : ""
-                    }`}
-                    id={`nav-${tabOrder}-tab`}
-                    data-bs-toggle="tab"
-                    data-bs-target={`#nav-${tabOrder}`}
-                    order="button"
-                    role="tab"
-                    aria-controls={`nav-${tabOrder}`}
-                    aria-selected={filterTab === tabOrder ? "true" : "false"}
-                    onClick={() => handleTabClick(tabOrder)}
-                  >
-                    {/* Button content */}
-                    {tabOrder === "pre-order"
-                      ? "Pre-Order"
-                      : tabOrder === "in-stock"
-                      ? "In Stock"
-                      : tabOrder === "customized"
-                      ? "Customized"
-                      : "All Products"}
-                  </button>
-                </div>
-              ))}
-            </div>
-          </nav>
+        <button
+          className="btn btn-outline-dark position-relative"
+          type="submit"
+        >
+          cart
+          <span className="badge bg-danger position-absolute top-0 start-100 translate-middle">
+            99
+          </span>
+        </button>
+        <SearchBox />
+        <div className="filterbtns mb-3 d-flex justify-content-between align-items-center">
+          <div className="typeBtns">
+            <button id="filter-preOrder" onClick={() => handleFilters("order")}>
+              order
+            </button>
+            <button
+              id="filter-inStock"
+              onClick={() => handleFilters("in-stock")}
+            >
+              in-stock
+            </button>
+            <button
+              id="filter-customized"
+              onClick={() => handleFilters("customized")}
+            >
+              customized
+            </button>
+            <button
+              id="filter-chicken"
+              onClick={() => handleFilters("chicken")}
+            >
+              chicken
+            </button>
+            <button id="filter-beef" onClick={() => handleFilters("beef")}>
+              beef
+            </button>
+            <button id="filter-duck" onClick={() => handleFilters("duck")}>
+              duck
+            </button>
+            <button id="reset" onClick={() => handleFilters("")}>
+              Reset
+            </button>
+          </div>
           {/* Sort dropdown */}
           <div className=" sortBtn">
             <label htmlFor="sortSelect">Sort:</label>
@@ -194,29 +189,19 @@ const Products = () => {
           </div>
         </div>
         {/* Filter by order result content */}
-        <div className="tab-content" id="nav-tabContent">
-          {tabItems.map((tabOrder) => (
-            <div
-              key={tabOrder}
-              className={`tab-pane fade ${
-                filterTab === tabOrder ? "active show" : ""
-              }`}
-              id={`nav-${tabOrder}`}
-              role="tabpanel"
-              aria-labelledby={`nav-${tabOrder}-tab`}
-            >
-              <div className="row">
-                <div className="col-md-9">
-                  <div className="row g-3">
-                    {filteredProducts.map((product) => (
-                      <CreateDataCard key={product.id} data={product} />
-                    ))}
-                  </div>
-                </div>
-                <div className="col-md-3"></div>
-              </div>
+        <div className="row">
+          <div className="col-md-3"></div>
+
+          <div className="col-md-9">
+            <div className="row g-3">
+              {productTypes.map((productType) => (
+                <CreateDataCard
+                  productType={productType}
+                  key={productType.id}
+                />
+              ))}
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </>
