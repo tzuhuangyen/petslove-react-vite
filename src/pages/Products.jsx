@@ -36,6 +36,7 @@ const Products = () => {
     //search handler
     const searchHandler = (event) => {
       const keyword = event.target.value;
+      setText(keyword); // Update the text state directly
 
       if (keyword !== "") {
         const searchProducts = jsonData.filter((product) => {
@@ -58,7 +59,7 @@ const Products = () => {
             id="search"
             type="search"
             className="form-control productSearch"
-            // value={text}
+            value={text}
             onChange={searchHandler}
             placeholder="search..."
           />
