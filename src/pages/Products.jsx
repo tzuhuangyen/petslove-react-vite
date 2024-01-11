@@ -4,8 +4,7 @@
 //sort price
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { FaCartPlus, FaHeart } from "react-icons/fa";
-import { CiShoppingCart } from "react-icons/ci";
+import { CiShoppingCart, CiHeart } from "react-icons/ci";
 
 const Products = () => {
   //取得原始資料
@@ -35,17 +34,17 @@ const Products = () => {
   //search box component
   const SearchBox = () => {
     //search handler
-    const onSearchHandler = (event) => {
-      const productKeyword = event.target.value;
+    const searchHandler = (event) => {
+      const keyword = event.target.value;
 
-      if (productKeyword !== "") {
-        const filteredProducts = jsonData.filter((product) => {
+      if (keyword !== "") {
+        const searchProducts = jsonData.filter((product) => {
           return (
-            product.name.toLowerCase().includes(productKeyword.toLowerCase()) ||
-            product.type.toLowerCase().includes(productKeyword.toLowerCase())
+            product.name.toLowerCase().includes(keyword.toLowerCase()) ||
+            product.type.toLowerCase().includes(keyword.toLowerCase())
           );
         });
-        setProductTypes(filteredProducts);
+        setProductTypes(searchProducts);
       } else {
         setProductTypes(jsonData);
       }
@@ -58,9 +57,9 @@ const Products = () => {
           <input
             id="search"
             type="search"
-            className="form-control"
-            value={text}
-            onChange={onSearchHandler}
+            className="form-control productSearch"
+            // value={text}
+            onChange={searchHandler}
             placeholder="search..."
           />
         </div>
@@ -115,10 +114,10 @@ const Products = () => {
             </div>
             <div className="btns">
               <button type="button" className=" btnHeart">
-                <FaHeart color="black" />
+                <CiHeart />
               </button>
               <button type="button" className=" btnCart">
-                <FaCartPlus color="black" />
+                <CiShoppingCart />
               </button>
             </div>
           </div>
