@@ -15,7 +15,7 @@ const Products = () => {
   const [productTypes, setProductTypes] = useState([]);
 
   //sort price
-  // const [sortPrice, setSortPrice] = useState("asc");
+  const [sortPrice, setSortPrice] = useState("asc");
 
   // 取得jsonData資料 Use useEffect to set the initial state when the component mounts
   useEffect(() => {
@@ -86,15 +86,17 @@ const Products = () => {
 
   //hanle sort by price
   //將過濾後的產品productTypes或全部產品依價錢排序
-  // const handleSortPrice = () => {
-  //   const sortedProducts = [...productTypes];
+  const handleSortPrice = () => {
+    const sortedProducts = [...productTypes];
 
-  //   sortedProducts.sort((a, b) =>
-  //     sortPrice === "asc" ? b.price - a.price : a.price - b.price
-  //   );
-  //   setProductTypes(sortedProducts);
-  //   setSortPrice((prevSort) => (prevSort === "asc" ? "desc" : "asc"));
-  // };
+    sortedProducts.sort((a, b) =>
+      sortPrice === "asc" ? b.price - a.price : a.price - b.price
+    );
+    console.log("Sorted Products:", sortedProducts);
+
+    setProductTypes(sortedProducts);
+    setSortPrice((prevSort) => (prevSort === "asc" ? "desc" : "asc"));
+  };
   // Card component: create a product card JSX(Product)
   const CreateDataCard = ({ productType }) => {
     return (
