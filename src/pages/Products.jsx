@@ -3,17 +3,9 @@
 //filter meats
 //sort price
 
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { fab } from "@fortawesome/free-brands-svg-icons";
-import { fas } from "@fortawesome/free-solid-svg-icons";
-import { far } from "@fortawesome/free-regular-svg-icons";
-library.add(fab, fas, far);
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { CiShoppingCart } from "react-icons/ci";
 
 import React, { useState, useEffect } from "react";
-import "./products.css";
-import datas from "./datas.json";
 //search box
 const SearchBox = ({ text, onSearchHandler }) => {
   return (
@@ -141,10 +133,7 @@ const Products = () => {
                 type="button"
                 className="btn btn-sm btn-outline-secondary"
               >
-                <FontAwesomeIcon
-                  icon={faShoppingCart}
-                  style={{ color: "gray" }}
-                />
+                <CiShoppingCart />
               </button>
             </div>
           </div>

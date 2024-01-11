@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import "./header.css";
 import Container from "react-bootstrap/Container";
+import { CiUser } from "react-icons/ci";
+
 //import Button from "react-bootstrap/Button";
 // Form from "react-bootstrap/Form";
 //import Nav from "react-bootstrap/Nav";
@@ -90,16 +91,7 @@ function Header() {
                           Home
                         </Link>
                       </li>
-                      <li className="nav-item">
-                        <Link
-                          className="nav-link"
-                          aria-current="page"
-                          href="index.html"
-                          to="/about"
-                        >
-                          About
-                        </Link>
-                      </li>
+
                       <li className="nav-item">
                         <Link className="nav-link" to="./products">
                           products
@@ -117,7 +109,7 @@ function Header() {
                       </li>
                       <li className="nav-item">
                         <Link className="nav-link" to="/login">
-                          Login{" "}
+                          <CiUser />{" "}
                         </Link>
                       </li>
                       <button
@@ -153,11 +145,6 @@ function Header() {
                     aria-labelledby="dropdownMenuLink"
                   >
                     <li>
-                      <Link className="dropdown-item" to="/about">
-                        About
-                      </Link>
-                    </li>
-                    <li>
                       <Link className="dropdown-item" to="/products">
                         Shop
                       </Link>
@@ -175,6 +162,7 @@ function Header() {
                         Contact
                       </Link>
                     </li>
+                    <CiUser />
                   </ul>
                 </div>
               </div>
