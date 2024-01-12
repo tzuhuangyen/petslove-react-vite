@@ -42,6 +42,11 @@
     height: 180px;
   }
 }
-.productSearch {
-  color: black;
+
+.productCard {
+  padding: 0;
+}
+.productBtns {
+  display: flex;
+  justify-content: space-between;
 }

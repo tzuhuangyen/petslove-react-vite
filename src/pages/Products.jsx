@@ -101,7 +101,7 @@ const Products = () => {
   const CreateDataCard = ({ productType }) => {
     return (
       <div className="col-4">
-        <div className="card mb-4 shadow-sm" key={productType.id}>
+        <div className="card mb-4 shadow-sm productCard" key={productType.id}>
           <img
             src={productType.img_url}
             className="card-img-top object-fit "
@@ -115,7 +115,7 @@ const Products = () => {
               <span className="card-text">{productType.order}</span>
               <p className="card-text">${productType.price}</p>
             </div>
-            <div className="btns">
+            <div className="btns productBtns">
               <button type="button" className=" btnHeart">
                 <CiHeart />
               </button>
