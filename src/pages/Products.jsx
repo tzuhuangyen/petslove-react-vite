@@ -16,6 +16,8 @@ const Products = () => {
 
   //sort price
   const [sortPrice, setSortPrice] = useState("asc");
+  //toggleFavorite function
+  const [favorites, setFavorites] = useState([]);
 
   // 取得jsonData資料 Use useEffect to set the initial state when the component mounts
   useEffect(() => {
@@ -85,7 +87,6 @@ const Products = () => {
   };
 
   //hanle sort by price
-  //將過濾後的產品productTypes或全部產品依價錢排序
   const handleSortPrice = () => {
     const sortedProducts = [...productTypes];
 
@@ -96,6 +97,42 @@ const Products = () => {
 
     setProductTypes(sortedProducts);
     setSortPrice((prevSort) => (prevSort === "asc" ? "desc" : "asc"));
+  };
+
+  //check item is already in favorite list
+  const isFavorite = (productId) => favorites.includes(productId);
+  // favorite function
+  const toggleFavorite = (productId) => {
+    const updatedFavorites = [...favorites];
+    const index = updatedFavorites.indexOf(productId);
+
+    if (index !== -1) {
+      // if item is already in the favorites array. Remove from favorites
+      updatedFavorites.splice(index, 1);
+    } else {
+      // or Add to favorites
+      updatedFavorites.push(productId);
+    }
+    //update state
+    setFavorites(updatedFavorites);
+    //update local storage
+    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+    console.log("Updated Favorites:", updatedFavorites);
+  };
+  // 取得favorites資料load the favorites from local storage when the component mounts.
+  useEffect(() => {
+    // Load favorites from local storage on mount
+    const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    setFavorites(storedFavorites);
+  }, []);
+
+  // filter favorite function
+  const filterFavorites = () => {
+    const favoriteProducts = jsonData.filter((product) => {
+      return isFavorite(product.id);
+    });
+    setProductTypes(favoriteProducts);
+    console.log(favoriteProducts);
   };
   // Card component: create a product card JSX(Product)
   const CreateDataCard = ({ productType }) => {
@@ -116,7 +153,10 @@ const Products = () => {
               <p className="card-text">${productType.price}</p>
             </div>
             <div className="btns productBtns">
-              <button type="button" className=" btnHeart">
+              <button
+                className=" btnHeart"
+                onClick={() => toggleFavorite(productType.id)}
+              >
                 <CiHeart />
               </button>
               <button type="button" className=" btnCart">
@@ -128,7 +168,6 @@ const Products = () => {
       </div>
     );
   };
-
   return (
     <>
       {/*JSON.stringify(productTypes)*/}
@@ -189,6 +228,10 @@ const Products = () => {
               <option value="desc"> High to Low</option>
             </select>
           </div>
+          {/* filter favorite */}
+          <button id="filter-favorite" onClick={() => filterFavorites()}>
+            <CiHeart />
+          </button>
         </div>
         {/* Filter by order result content */}
         <div className="row">
