@@ -9,10 +9,11 @@ import About from "./pages/About";
 import IndexBanner from "./pages/index/IndexBanner";
 import Products from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
-import SubscriptionForm from "./pages/SubscriptionForm";
-import Footer from "./components/Footer";
-import Login from "./pages/member/member";
 import Favorite from "./pages/Favorite";
+import SubscriptionForm from "./pages/SubscriptionForm";
+import Login from "./pages/member/Login";
+import SignUp from "./pages/member/SignUp";
+import Footer from "./components/Footer";
 function App() {
   return (
     <div className="App">
@@ -28,8 +29,8 @@ function App() {
 
         <Route path="/productDetail" element={<ProductDetail />} />
         <Route path="/favorite" element={<Favorite />} />
-
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/subscriptionForm" element={<SubscriptionForm />} />
       </Routes>
 

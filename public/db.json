@@ -1,7 +1,30 @@
 {
   "users": [
-    { "id": "1", "title": "a title" },
-    { "id": "2", "title": "another title" }
+    {
+      "id": "1",
+      "username": "a title 1",
+      "password": "12345678"
+    },
+    {
+      "id": "2",
+      "username": "a title 2",
+      "password": "12345678"
+    },
+    {
+      "username": "3@gmail.com",
+      "password": "12345678@@",
+      "id": "_cCkCJ9"
+    },
+    {
+      "username": "y4@gmail.com",
+      "password": "12345678@@",
+      "id": "79xfY5a"
+    },
+    {
+      "username": "y5@gmail.com",
+      "password": "12345678@@",
+      "id": "jWS3gd8"
+    }
   ],
   "products": [
     {
@@ -12,7 +35,6 @@
       "type": "chicken",
       "order": "order"
     },
-
     {
       "id": "2",
       "name": "beef 2",

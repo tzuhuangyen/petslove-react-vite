@@ -4,7 +4,8 @@
 //sort price
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { CiShoppingCart, CiHeart } from "react-icons/ci";
+import { CiShoppingCart } from "react-icons/ci";
+import { MdFavoriteBorder } from "react-icons/md";
 
 const Products = () => {
   //取得原始資料
@@ -161,7 +162,7 @@ const Products = () => {
                 }`}
                 onClick={() => toggleFavorite(productType.id)}
               >
-                <CiHeart />
+                <MdFavoriteBorder />
               </button>
               <button type="button" className=" btnCart">
                 <CiShoppingCart />
@@ -240,7 +241,7 @@ const Products = () => {
             style={{ color: "#8a63a2" }}
             onClick={() => filterFavorites()}
           >
-            <CiHeart />
+            <MdFavoriteBorder />
           </button>
         </div>
         {/* Filter by order result content */}
