@@ -136,6 +136,8 @@ const Products = () => {
   };
   // Card component: create a product card JSX(Product)
   const CreateDataCard = ({ productType }) => {
+    const isProductFavorite = isFavorite(productType.id);
+
     return (
       <div className="col-4">
         <div className="card mb-4 shadow-sm productCard" key={productType.id}>
@@ -154,7 +156,9 @@ const Products = () => {
             </div>
             <div className="btns productBtns">
               <button
-                className=" btnHeart"
+                className={`btnHeart btn-purple-outline ${
+                  isProductFavorite ? "favorited" : ""
+                }`}
                 onClick={() => toggleFavorite(productType.id)}
               >
                 <CiHeart />
@@ -184,34 +188,53 @@ const Products = () => {
         <SearchBox />
         <div className="filterbtns mb-3 d-flex justify-content-between align-items-center">
           <div className="typeBtns">
-            <button id="filter-preOrder" onClick={() => handleFilters("order")}>
+            <button
+              id="filter-preOrder"
+              className="btn-purple "
+              onClick={() => handleFilters("order")}
+            >
               order
             </button>
             <button
               id="filter-inStock"
+              className="btn-purple"
               onClick={() => handleFilters("in-stock")}
             >
               in-stock
             </button>
             <button
               id="filter-customized"
+              className="btn-purple "
               onClick={() => handleFilters("customized")}
             >
               customized
             </button>
             <button
               id="filter-chicken"
+              className="btn-purple "
               onClick={() => handleFilters("chicken")}
             >
               chicken
             </button>
-            <button id="filter-beef" onClick={() => handleFilters("beef")}>
+            <button
+              id="filter-beef"
+              className="btn-purple "
+              onClick={() => handleFilters("beef")}
+            >
               beef
             </button>
-            <button id="filter-duck" onClick={() => handleFilters("duck")}>
+            <button
+              id="filter-duck"
+              className="btn-purple "
+              onClick={() => handleFilters("duck")}
+            >
               duck
             </button>
-            <button id="reset" onClick={() => handleFilters("")}>
+            <button
+              id="reset"
+              className="btn-purple "
+              onClick={() => handleFilters("")}
+            >
               Reset
             </button>
           </div>
@@ -229,7 +252,11 @@ const Products = () => {
             </select>
           </div>
           {/* filter favorite */}
-          <button id="filter-favorite" onClick={() => filterFavorites()}>
+          <button
+            id="filter-favorite"
+            className="btn-purple"
+            onClick={() => filterFavorites()}
+          >
             <CiHeart />
           </button>
         </div>
