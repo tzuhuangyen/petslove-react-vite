@@ -43,44 +43,39 @@
   }
 }
 
+//filter btns
+.filterbtns {
+  .typeBtns,
+  .filterFavoBtn {
+    button {
+      padding: 8px;
+      margin-right: 4px;
+      background-color: $secondary;
+      color: #fff;
+      &:hover {
+        background-color: $primary;
+        color: #fff;
+      }
+    }
+  }
+}
 .productCard {
   padding: 0;
 }
-.productBtns {
+.cardBtns {
   display: flex;
   justify-content: space-between;
 }
-/* 在你的样式文件中添加以下样式 */
-.btn-purple {
-  background-color: #8a63a2;
-  color: #fff;
-}
-
-.btn-purple:hover {
-  background-color: #6c4681;
-  color: #fff;
-}
-
-//card btn
-.btn-purple-outline {
-  color: #8a63a2;
-  border: 1px solid #8a63a2;
-}
-
-.btn-purple-outline:hover {
-  color: #fff;
-  background-color: #8a63a2;
-}
+//product card btn
 .btnHeart.btn-purple-outline {
-  color: #4a2954;
-  border: 1px solid #4a2954;
+  color: $secondary;
   background-color: transparent;
 }
 .btnHeart.btn-purple-outline.favorited {
   color: #fff;
-  background-color: #4a2954; /* 實心紫色背景 */
+  background-color: $secondary; /* 實心紫色背景 */
 }
 .btnHeart.btn-purple-outline:hover {
-  background-color: #4a2954;
+  background-color: $secondary;
   color: #fff;
 }

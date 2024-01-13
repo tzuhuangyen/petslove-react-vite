@@ -154,7 +154,7 @@ const Products = () => {
               <span className="card-text">{productType.order}</span>
               <p className="card-text">${productType.price}</p>
             </div>
-            <div className="btns productBtns">
+            <div className="btns cardBtns">
               <button
                 className={`btnHeart btn-purple-outline ${
                   isProductFavorite ? "favorited" : ""
@@ -188,11 +188,7 @@ const Products = () => {
         <SearchBox />
         <div className="filterbtns mb-3 d-flex justify-content-between align-items-center">
           <div className="typeBtns">
-            <button
-              id="filter-preOrder"
-              className="btn-purple "
-              onClick={() => handleFilters("order")}
-            >
+            <button id="filter-preOrder" onClick={() => handleFilters("order")}>
               order
             </button>
             <button
@@ -204,37 +200,23 @@ const Products = () => {
             </button>
             <button
               id="filter-customized"
-              className="btn-purple "
               onClick={() => handleFilters("customized")}
             >
               customized
             </button>
             <button
               id="filter-chicken"
-              className="btn-purple "
               onClick={() => handleFilters("chicken")}
             >
               chicken
             </button>
-            <button
-              id="filter-beef"
-              className="btn-purple "
-              onClick={() => handleFilters("beef")}
-            >
+            <button id="filter-beef" onClick={() => handleFilters("beef")}>
               beef
             </button>
-            <button
-              id="filter-duck"
-              className="btn-purple "
-              onClick={() => handleFilters("duck")}
-            >
+            <button id="filter-duck" onClick={() => handleFilters("duck")}>
               duck
             </button>
-            <button
-              id="reset"
-              className="btn-purple "
-              onClick={() => handleFilters("")}
-            >
+            <button id="reset" onClick={() => handleFilters("")}>
               Reset
             </button>
           </div>
@@ -254,7 +236,8 @@ const Products = () => {
           {/* filter favorite */}
           <button
             id="filter-favorite"
-            className="btn-purple"
+            className="filterFavoBtn"
+            style={{ color: "#8a63a2" }}
             onClick={() => filterFavorites()}
           >
             <CiHeart />
