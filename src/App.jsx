@@ -1,5 +1,4 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
 import "./assets/all.scss";
 import { Routes, Route } from "react-router-dom";
 

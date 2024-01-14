@@ -1,11 +1,23 @@
-//search box
-//filter orders
-//filter meats
-//sort price
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
+// import { useContext } from "react";
 import axios from "axios";
 import { CiShoppingCart } from "react-icons/ci";
 import { MdFavoriteBorder } from "react-icons/md";
+import CartNavbar from "../components/CartNavbar";
+import Cart from "../components/Cart";
+import { CartContext } from "../Store";
+//add to cart click dispatch function
+
+const cartReducer = (state, action) => {
+  console.log("action:", action);
+  switch (action.type) {
+    case "ADD_TO_CART":
+      return { ...state, cartList: [...state.cartList, action.payload] };
+    // Handle other cases as needed
+    default:
+      return state;
+  }
+};
 
 const Products = () => {
   //取得原始資料
@@ -14,12 +26,15 @@ const Products = () => {
   const [text, setText] = useState([]);
   //filter
   const [productTypes, setProductTypes] = useState([]);
-
   //sort price
   const [sortPrice, setSortPrice] = useState("asc");
   //toggleFavorite function
   const [favorites, setFavorites] = useState([]);
-
+  //add to cart dispatch function
+  const [state, dispatch] = useReducer(cartReducer, {
+    cartList: [],
+  });
+  // const [state, dispatch] = useContext(CartContext);
   // 取得jsonData資料 Use useEffect to set the initial state when the component mounts
   useEffect(() => {
     (async () => {
@@ -140,20 +155,21 @@ const Products = () => {
     const isProductFavorite = isFavorite(productType.id);
 
     return (
-      <div className="col-4">
-        <div className="card mb-4 shadow-sm productCard" key={productType.id}>
+      <div className="col" key={productType.id}>
+        <div className="card mb-4 shadow-sm productCard">
           <img
             src={productType.img_url}
             className="card-img-top object-fit "
             alt="product"
-            style={{ height: "200px" }}
           />
           <div className="card-body">
-            <p className="card-title">{productType.name}</p>
-            <p className="card-text">Type: {productType.type}</p>
+            <p className="card-title">
+              {productType.name}
+              <span className="card-text float-end">${productType.price}</span>
+            </p>
             <div className="d-flex justify-content-between align-end  ">
+              <p className="card-text">Type: {productType.type}</p>
               <span className="card-text">{productType.order}</span>
-              <p className="card-text">${productType.price}</p>
             </div>
             <div className="btns cardBtns">
               <button
@@ -164,101 +180,109 @@ const Products = () => {
               >
                 <MdFavoriteBorder />
               </button>
-              <button type="button" className=" btnCart">
+              <button
+                type="button"
+                className=" btnCart"
+                onClick={() => {
+                  dispatch({
+                    type: "ADD_TO_CART",
+                    payload: { ...productType, qty: 1 },
+                  });
+                }}
+              >
                 <CiShoppingCart />
               </button>
             </div>
           </div>
-        </div>
+        </div>{" "}
       </div>
     );
   };
+
   return (
     <>
       {/*JSON.stringify(productTypes)*/}
-      <div className="container">
-        <button
-          className="btn btn-outline-dark position-relative"
-          type="submit"
-        >
-          cart
-          <span className="badge bg-danger position-absolute top-0 start-100 translate-middle">
-            99
-          </span>
-        </button>
-        <SearchBox />
-        <div className="filterbtns mb-3 d-flex justify-content-between align-items-center">
-          <div className="typeBtns">
-            <button id="filter-preOrder" onClick={() => handleFilters("order")}>
-              order
-            </button>
+      <CartContext.Provider value={{ state, dispatch }}>
+        <div className="container-lg">
+          <CartNavbar />
+          <SearchBox />
+          <div className="filterbtns mb-4 d-flex justify-content-between align-items-center">
+            <div className="typeBtns">
+              <button
+                id="filter-preOrder"
+                onClick={() => handleFilters("order")}
+              >
+                order
+              </button>
+              <button
+                id="filter-inStock"
+                className="btn-purple"
+                onClick={() => handleFilters("in-stock")}
+              >
+                in-stock
+              </button>
+              <button
+                id="filter-customized"
+                onClick={() => handleFilters("customized")}
+              >
+                customized
+              </button>
+              <button
+                id="filter-chicken"
+                onClick={() => handleFilters("chicken")}
+              >
+                chicken
+              </button>
+              <button id="filter-beef" onClick={() => handleFilters("beef")}>
+                beef
+              </button>
+              <button id="filter-duck" onClick={() => handleFilters("duck")}>
+                duck
+              </button>
+              <button id="reset" onClick={() => handleFilters("")}>
+                Reset
+              </button>
+            </div>
+            {/* Sort dropdown */}
+            <div className=" sortBtn">
+              <label htmlFor="sortSelect">Sort:</label>
+              <select
+                id="sortSelect"
+                className="filterSelect"
+                defaultValue={"increase"}
+                onChange={(e) => handleSortPrice(e.target.value)}
+              >
+                <option value="asc">Low to High </option>
+                <option value="desc"> High to Low</option>
+              </select>
+            </div>
+            {/* filter favorite */}
             <button
-              id="filter-inStock"
-              className="btn-purple"
-              onClick={() => handleFilters("in-stock")}
+              id="filter-favorite"
+              className="filterFavoBtn"
+              onClick={() => filterFavorites()}
             >
-              in-stock
-            </button>
-            <button
-              id="filter-customized"
-              onClick={() => handleFilters("customized")}
-            >
-              customized
-            </button>
-            <button
-              id="filter-chicken"
-              onClick={() => handleFilters("chicken")}
-            >
-              chicken
-            </button>
-            <button id="filter-beef" onClick={() => handleFilters("beef")}>
-              beef
-            </button>
-            <button id="filter-duck" onClick={() => handleFilters("duck")}>
-              duck
-            </button>
-            <button id="reset" onClick={() => handleFilters("")}>
-              Reset
+              <MdFavoriteBorder />
             </button>
           </div>
-          {/* Sort dropdown */}
-          <div className=" sortBtn">
-            <label htmlFor="sortSelect">Sort:</label>
-            <select
-              id="sortSelect"
-              className="filterSelect"
-              defaultValue={"increase"}
-              onChange={(e) => handleSortPrice(e.target.value)}
-            >
-              <option value="asc">Low to High </option>
-              <option value="desc"> High to Low</option>
-            </select>
-          </div>
-          {/* filter favorite */}
-          <button
-            id="filter-favorite"
-            className="filterFavoBtn"
-            onClick={() => filterFavorites()}
-          >
-            <MdFavoriteBorder />
-          </button>
-        </div>
-        {/* Filter by order result content */}
-        <div className="row">
-          <div className="col-md-3"></div>
-
-          <div className="col-md-9">
-            <div className="row g-3">
-              {productTypes.map((productType) => (
-                <CreateDataCard
-                  productType={productType}
-                  key={productType.id}
-                />
-              ))}
+          {/* Filter by order result content */}
+          <div className="row">
+            <div className="col-md-7">
+              <div className="row row-cols-3 g-3">
+                {productTypes.map((productType) => (
+                  <CreateDataCard
+                    productType={productType}
+                    key={productType.id}
+                  />
+                ))}
+              </div>
+            </div>
+            <div className="col-md-5">
+              <Cart />
             </div>
           </div>
         </div>
-      </div>
+      </CartContext.Provider>
     </>
   );
 };

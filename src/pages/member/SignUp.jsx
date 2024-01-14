@@ -65,6 +65,10 @@ const SignUp = () => {
             Already have an account?
             <Link to="/login">Login</Link>
           </p>
+          <p>
+            Delete your an account?
+            <Link to="/delete">Delete</Link>
+          </p>
         </form>
       </div>
     </div>

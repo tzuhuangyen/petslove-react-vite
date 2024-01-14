@@ -37,9 +37,16 @@
 }
 
 // 桌機 筆電版
-.allProduct {
-  .card-img-top {
-    height: 180px;
+
+.navbar {
+  .cartBtn {
+    display: flex;
+    align-items: center;
+    color: $secondary;
+    background-color: transparent;
+    .badge {
+      border-radius: 50%;
+    }
   }
 }
 
@@ -78,4 +85,10 @@
 .btnHeart.btn-purple-outline:hover {
   background-color: $secondary;
   color: #fff;
+}
+.btnCart {
+  &:hover {
+    background-color: $primary;
+    color: #fff;
+  }
 }

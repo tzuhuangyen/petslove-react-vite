@@ -1,7 +1,7 @@
 function IndexBanner() {
   return (
     <>
-      <section className="banner">
+      <section className="banner container-fluid ">
         <div className="container position-relative">
           {/* <!-- slogan --> */}
           <div className="slogan d-none d-md-block">

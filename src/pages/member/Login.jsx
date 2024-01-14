@@ -34,6 +34,10 @@ function Login() {
             <Link className="nav-link" to="/signup">
               SignUp{" "}
             </Link>
+            <p>
+              Delete your an account?
+              <Link to="/delete">Delete</Link>
+            </p>
           </form>
         </div>
       </div>
