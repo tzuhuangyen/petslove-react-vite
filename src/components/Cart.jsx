@@ -1,10 +1,16 @@
 import React from "react";
+import { useContext } from "react";
+import { CartContext } from "../Store";
 
 function Cart() {
+  const contextValue = useContext(CartContext);
+  const { state, dispatch } = contextValue;
+  // Check if state and state.cartList are defined before accessing
+  const cartList = state && state.cartList ? state.cartList : [];
   return (
     <div>
-      {" "}
       <div className="bg-light p-3">
+        {JSON.stringify(state.cartList)}
         <table className="table align-middle">
           <tbody>
             <tr>

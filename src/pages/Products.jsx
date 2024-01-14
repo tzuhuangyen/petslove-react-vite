@@ -6,12 +6,15 @@ import { MdFavoriteBorder } from "react-icons/md";
 import CartNavbar from "../components/CartNavbar";
 import Cart from "../components/Cart";
 import { CartContext } from "../Store";
-//add to cart click dispatch function
 
+//add to cart click dispatch function
 const cartReducer = (state, action) => {
-  console.log("action:", action);
+  const { cartList } = state;
+
   switch (action.type) {
     case "ADD_TO_CART":
+      console.log("action:", action);
+      cartList.push(action.payload);
       return { ...state, cartList: [...state.cartList, action.payload] };
     // Handle other cases as needed
     default:
@@ -31,9 +34,9 @@ const Products = () => {
   //toggleFavorite function
   const [favorites, setFavorites] = useState([]);
   //add to cart dispatch function
-  const [state, dispatch] = useReducer(cartReducer, {
-    cartList: [],
-  });
+
+  const [state, dispatch] = useReducer(cartReducer, { cartList: [] });
+
   // const [state, dispatch] = useContext(CartContext);
   // 取得jsonData資料 Use useEffect to set the initial state when the component mounts
   useEffect(() => {
@@ -186,7 +189,7 @@ const Products = () => {
                 onClick={() => {
                   dispatch({
                     type: "ADD_TO_CART",
-                    payload: { ...productType, qty: 1 },
+                    payload: { ...productType, quantity: 1 },
                   });
                 }}
               >
