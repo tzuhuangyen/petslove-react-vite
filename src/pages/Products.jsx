@@ -19,19 +19,43 @@ const cartReducer = (state, action) => {
       console.log("action:", action);
       //if no item in the cart
       if (index === -1) {
-        cartList.push(action.payload);
+        // cartList.push(action.payload);
+        // Use concat or spread operator to create a new array
+        const updatedCartList = cartList.concat(action.payload);
+        return {
+          ...state,
+          cartList: updatedCartList,
+          total: caleTotalPrice(updatedCartList),
+        };
       } else {
-        cartList[index].quantity += action.payload.quantity;
+        // If item already exists, update its quantity
+        const updatedCartList = [...cartList];
+        updatedCartList[index].quantity += action.payload.quantity;
+        return {
+          ...state,
+          cartList: updatedCartList,
+          total: caleTotalPrice(updatedCartList),
+        };
       }
-      return { ...state, cartList: [...state.cartList, action.payload] };
 
     case "CHANGE_CART_QUANTITY":
-      cartList[index].quantity = action.payload.quantity;
-      return { ...state, cartList };
+      const updatedCartList = [...cartList];
+      updatedCartList[index].quantity = action.payload.quantity;
+      return {
+        ...state,
+        cartList: updatedCartList,
+        total: caleTotalPrice(updatedCartList),
+      };
 
     case "REMOVE_CART_ITEM":
-      cartList.splice(index, 1);
-      return { ...state, cartList };
+      const filteredCartList = cartList.filter(
+        (item) => item.id !== action.payload.id
+      );
+      return {
+        ...state,
+        cartList: filteredCartList,
+        total: caleTotalPrice(filteredCartList),
+      };
 
     // Handle other cases as needed
     default:
@@ -175,7 +199,7 @@ const Products = () => {
     const isProductFavorite = isFavorite(productType.id);
 
     return (
-      <div className="col" key={productType.id}>
+      <div className="col">
         <div className="card mb-4 shadow-sm productCard">
           <img
             src={productType.img_url}
@@ -289,10 +313,10 @@ const Products = () => {
           <div className="row">
             <div className="col-md-7">
               <div className="row row-cols-3 g-3">
-                {productTypes.map((productType) => (
+                {productTypes.map((productType, index) => (
                   <CreateDataCard
                     productType={productType}
-                    key={productType.id}
+                    key={`${productType.id}-${index}`}
                   />
                 ))}
               </div>
@@ -307,4 +331,11 @@ const Products = () => {
   );
 };
 
+function caleTotalPrice(cartList) {
+  return cartList
+    .map((item) => {
+      item.quantity * item.price;
+    })
+    .reduce((a, b) => a + b, 0);
+}
 export default Products;
