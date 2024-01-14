@@ -16,22 +16,35 @@ function Cart() {
           <tbody>
             {state.cartList.map((item) => {
               return (
-                <tr key={item.id}>
-                  <td>
-                    <a href="#">x</a>
+                <tr key={item.id} className="table-row">
+                  <td className="p-0">
+                    <button
+                      type="button"
+                      className="deleteBtn"
+                      onClick={() => {
+                        dispatch({
+                          type: "REMOVE_CART_ITEM",
+                          payload: {
+                            ...item,
+                          },
+                        });
+                      }}
+                    >
+                      x
+                    </button>
                   </td>
-                  <td>
+                  <td className="pe-0">
                     <img src={item.img_url} alt="" className="table-img" />
                   </td>
                   <td>
                     {item.name} <br />
                     <span className="text-muted">{item.price}</span>
                   </td>
-                  <td>
+                  <td className="p-0">
                     <select
                       name=""
                       id=""
-                      className="form-select"
+                      className="form-select "
                       value={item.quantity}
                       onChange={(e) => {
                         e.preventDefault();

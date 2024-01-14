@@ -28,6 +28,11 @@ const cartReducer = (state, action) => {
     case "CHANGE_CART_QUANTITY":
       cartList[index].quantity = action.payload.quantity;
       return { ...state, cartList };
+
+    case "REMOVE_CART_ITEM":
+      cartList.splice(index, 1);
+      return { ...state, cartList };
+
     // Handle other cases as needed
     default:
       return state;
