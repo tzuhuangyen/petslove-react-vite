@@ -238,7 +238,6 @@ const Products = () => {
           <button
             id="filter-favorite"
             className="filterFavoBtn"
-            style={{ color: "#8a63a2" }}
             onClick={() => filterFavorites()}
           >
             <MdFavoriteBorder />

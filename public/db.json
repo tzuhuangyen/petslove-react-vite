@@ -5,25 +5,11 @@
       "username": "a title 1",
       "password": "12345678"
     },
-    {
-      "id": "2",
-      "username": "a title 2",
-      "password": "12345678"
-    },
+
     {
       "username": "y3@gmail.com",
       "password": "12345678@@@",
       "id": "0ES4vxq"
-    },
-    {
-      "username": "y5@gmail.com",
-      "password": "12345678@@",
-      "id": "BX-36pO"
-    },
-    {
-      "username": "yyy@gmail.com",
-      "password": "12345678@@",
-      "id": "k1dLLXn"
     }
   ],
   "products": [
