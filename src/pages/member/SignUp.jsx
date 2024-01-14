@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const SignUp = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
+  const navigate = useNavigate();
   const handleSignUp = async () => {
     try {
       const baseURL = "http://localhost:3000/users";
@@ -17,6 +17,10 @@ const SignUp = () => {
       const response = await axios.post(baseURL, data);
 
       console.log("User created:", response.data);
+      alert("User registered successfully!");
+      setTimeout(() => {
+        navigate("/login");
+      }, 500);
     } catch (error) {
       console.error("Error creating user:", error);
     }
