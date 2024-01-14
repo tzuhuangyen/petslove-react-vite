@@ -10,25 +10,54 @@ function Cart() {
   return (
     <div>
       <div className="bg-light p-3">
-        {JSON.stringify(state.cartList)}
+        {/*        {JSON.stringify(state.cartList)}
+         */}{" "}
         <table className="table align-middle">
           <tbody>
-            <tr>
-              <td>
-                <a href="#">x</a>
-              </td>
-              <td>
-                <img src="" alt="" className="table-img" />
-              </td>
-              <td>
-                name <br />
-                <span className="text-muted">price</span>
-              </td>
-              <td>
-                <select name="" id="" className="form-select"></select>
-              </td>
-              <td className="text-end"> €10</td>
-            </tr>
+            {state.cartList.map((item) => {
+              return (
+                <tr key={item.id}>
+                  <td>
+                    <a href="#">x</a>
+                  </td>
+                  <td>
+                    <img src={item.img_url} alt="" className="table-img" />
+                  </td>
+                  <td>
+                    {item.name} <br />
+                    <span className="text-muted">{item.price}</span>
+                  </td>
+                  <td>
+                    <select
+                      name=""
+                      id=""
+                      className="form-select"
+                      value={item.quantity}
+                      onChange={(e) => {
+                        e.preventDefault();
+                        const quantity = parseInt(e.target.value);
+                        dispatch({
+                          type: "CHANGE_CART_QUANTITY",
+                          payload: {
+                            ...item,
+                            quantity,
+                          },
+                        });
+                      }}
+                    >
+                      {[...Array(5)].map((_, i) => {
+                        return (
+                          <option value={i + 1} key={i}>
+                            {i + 1}
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </td>
+                  <td className="text-end"> €{item.price * item.quantity}</td>
+                </tr>
+              );
+            })}
           </tbody>
           <tfoot>
             <tr>

@@ -10,12 +10,24 @@ import { CartContext } from "../Store";
 //add to cart click dispatch function
 const cartReducer = (state, action) => {
   const { cartList } = state;
+  //check cart has the same item
+  const index = cartList.findIndex((item) => item.id === action.payload.id);
+  console.log("index:", index);
 
   switch (action.type) {
     case "ADD_TO_CART":
       console.log("action:", action);
-      cartList.push(action.payload);
+      //if no item in the cart
+      if (index === -1) {
+        cartList.push(action.payload);
+      } else {
+        cartList[index].quantity += action.payload.quantity;
+      }
       return { ...state, cartList: [...state.cartList, action.payload] };
+
+    case "CHANGE_CART_QUANTITY":
+      cartList[index].quantity = action.payload.quantity;
+      return { ...state, cartList };
     // Handle other cases as needed
     default:
       return state;
