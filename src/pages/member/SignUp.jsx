@@ -15,6 +15,7 @@ const SignUp = () => {
       };
       // 发送 POST 请求到 /users endpoint
       const response = await axios.post(baseURL, data);
+
       console.log("User created:", response.data);
     } catch (error) {
       console.error("Error creating user:", error);
@@ -25,7 +26,7 @@ const SignUp = () => {
     <div className="form-container">
       <h1>Sign up</h1>
       <div className="signup-form">
-        <form id="form">
+        <form id="form" onSubmit={(e) => e.preventDefault()}>
           <label htmlFor="username">Username:</label>
           <input
             value={username}
@@ -48,13 +49,14 @@ const SignUp = () => {
             required
           />
 
-          <input
+          <button
             type="submit"
             value="Sign Up"
             className="form--submit"
             onClick={handleSignUp}
-          />
-
+          >
+            Sign Up
+          </button>
           <p>
             Already have an account?
             <Link to="/login">Login</Link>
