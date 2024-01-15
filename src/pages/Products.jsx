@@ -6,11 +6,18 @@ import { MdFavoriteBorder } from "react-icons/md";
 import CartNavbar from "../components/CartNavbar";
 import Cart from "../components/Cart";
 import { CartContext } from "../Store";
+// const initialState = {
+//   cartList: [],
+//   lastAddedItemId: null,
+// };
 
-//add to cart click dispatch function
+//add item to cart click dispatch function
 const cartReducer = (state, action) => {
   const { cartList } = state;
-  //check cart has the same item
+
+  let updatedCartList;
+
+  //check has the same item in the cart
   const index = cartList.findIndex((item) => item.id === action.payload.id);
   console.log("index:", index);
 
@@ -21,7 +28,30 @@ const cartReducer = (state, action) => {
       if (index === -1) {
         // cartList.push(action.payload);
         // Use concat or spread operator to create a new array
-        const updatedCartList = cartList.concat(action.payload);
+        updatedCartList = cartList.concat(action.payload);
+        // POST request to add a new cart item
+        axios
+          .post("http://localhost:3000/carts", {
+            productName: action.payload.name,
+            quantity: action.payload.quantity,
+            price: action.payload.price,
+            total: action.payload.quantity * action.payload.price,
+          })
+          .then((response) => {
+            console.log("New item added to cart successfully", response.data);
+            // 存储自动增量ID到状态
+            const newItemId = response.data.id;
+            dispatch({ type: "STORE_ITEM_ID", payload: newItemId });
+          })
+          .catch(
+            (error) => console.error("Error adding new item to cart:", error)
+            //ReferenceError: dispatch is not defined
+          );
+        localStorage.setItem(
+          "cart",
+          JSON.stringify({ cartList: updatedCartList })
+        );
+
         return {
           ...state,
           cartList: updatedCartList,
@@ -29,32 +59,68 @@ const cartReducer = (state, action) => {
         };
       } else {
         // If item already exists, update its quantity
-        const updatedCartList = [...cartList];
+        updatedCartList = [...cartList];
         updatedCartList[index].quantity += action.payload.quantity;
+
         return {
           ...state,
           cartList: updatedCartList,
           total: caleTotalPrice(updatedCartList),
         };
       }
-
+    // case "STORE_ITEM_ID":
+    //   return {
+    //     ...state,
+    //     lastAddedItemId: action.payload,
+    //   };
     case "CHANGE_CART_QUANTITY":
-      const updatedCartList = [...cartList];
+      updatedCartList = [...cartList];
       updatedCartList[index].quantity = action.payload.quantity;
+      // 从状态中获取存储的ID
+      const itemId = state.lastAddedItemId;
+
+      // axios.patch update json server's cart data
+      axios
+        .patch(`http://localhost:3000/carts//${itemId}`, {
+          quantity: updatedCartList[index].quantity,
+          total: updatedCartList[index].quantity * updatedCartList[index].price,
+        })
+        .then((response) =>
+          console.log("Cart item updated successfully", response.data)
+        )
+        .catch((error) => console.error("Error updating cart:", error));
+
+      localStorage.setItem(
+        "cart",
+        JSON.stringify({ cartList: updatedCartList })
+      );
+
       return {
         ...state,
         cartList: updatedCartList,
         total: caleTotalPrice(updatedCartList),
       };
-
     case "REMOVE_CART_ITEM":
-      const filteredCartList = cartList.filter(
-        (item) => item.id !== action.payload.id
+      const itemIdToRemove = action.payload.id;
+      updatedCartList = cartList.filter((item) => item.id !== itemIdToRemove);
+
+      // Update cart in local storage
+      localStorage.setItem(
+        "cart",
+        JSON.stringify({ cartList: updatedCartList })
       );
+
       return {
         ...state,
-        cartList: filteredCartList,
-        total: caleTotalPrice(filteredCartList),
+        cartList: updatedCartList,
+        total: caleTotalPrice(updatedCartList),
+      };
+    // Handle other cases as needed
+    case "LOAD_CART":
+      return {
+        ...state,
+        cartList: action.payload.cartList,
+        total: caleTotalPrice(action.payload.cartList),
       };
 
     // Handle other cases as needed
@@ -64,6 +130,8 @@ const cartReducer = (state, action) => {
 };
 
 const Products = () => {
+  //add to cart dispatch function
+  const [state, dispatch] = useReducer(cartReducer, { cartList: [] });
   //取得原始資料
   const [jsonData, setJsonData] = useState();
   //search
@@ -74,12 +142,8 @@ const Products = () => {
   const [sortPrice, setSortPrice] = useState("asc");
   //toggleFavorite function
   const [favorites, setFavorites] = useState([]);
-  //add to cart dispatch function
 
-  const [state, dispatch] = useReducer(cartReducer, { cartList: [] });
-
-  // const [state, dispatch] = useContext(CartContext);
-  // 取得jsonData資料 Use useEffect to set the initial state when the component mounts
+  // 取得jsonData資料 Use useEffect to set the initial state
   useEffect(() => {
     (async () => {
       try {
@@ -161,7 +225,7 @@ const Products = () => {
 
   //check item is already in favorite list
   const isFavorite = (productId) => favorites.includes(productId);
-  // favorite function
+  // add item favorite function
   const toggleFavorite = (productId) => {
     const updatedFavorites = [...favorites];
     const index = updatedFavorites.indexOf(productId);
@@ -179,12 +243,19 @@ const Products = () => {
     localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
     console.log("Updated Favorites:", updatedFavorites);
   };
-  // 取得favorites資料load the favorites from local storage when the component mounts.
+  // get favorites data and load the favorites from local storage when the component mounts.
   useEffect(() => {
-    // Load favorites from local storage on mount
+    // Load favorites & cart from local storage on mount
     const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    const storedCart = JSON.parse(localStorage.getItem("cart")) || {
+      cartList: [],
+    };
+
     setFavorites(storedFavorites);
-  }, []);
+    dispatch({ type: "LOAD_CART", payload: storedCart });
+    console.log("Favorites:", favorites);
+    console.log("Cart:", storedCart);
+  }, [dispatch]);
 
   // filter favorite function
   const filterFavorites = () => {
@@ -333,9 +404,7 @@ const Products = () => {
 
 function caleTotalPrice(cartList) {
   return cartList
-    .map((item) => {
-      item.quantity * item.price;
-    })
+    .map((item) => item.quantity * item.price)
     .reduce((a, b) => a + b, 0);
 }
 export default Products;
