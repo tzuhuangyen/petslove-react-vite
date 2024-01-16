@@ -1,8 +1,8 @@
 # React + Vite
 [demo]https://tzuhuangyen.github.io/petslove-react-vite/
 
-# Inspiration Source
-## 5 dogs & 5cats
+###  Inspiration Source
+* 5 dogs & 5cats
 ## different food need 
 ## costs
 ## no preservatives
