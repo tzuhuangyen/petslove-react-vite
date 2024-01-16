@@ -1,3 +1,4 @@
+//product page's cart component
 import React from "react";
 import { useContext } from "react";
 import { CartContext } from "../Store";

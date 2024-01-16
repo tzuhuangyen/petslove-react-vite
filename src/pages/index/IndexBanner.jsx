@@ -7,17 +7,14 @@ function IndexBanner() {
           <div className="slogan d-none d-md-block">
             <div>
               <p className="animate__animated animate__slideInRight animate__slower">
-                100% nature・no chemical
+                100% nature・no artificial preservatives
               </p>
               <h2>Homemade pet's snacks</h2>
               <span> Limited Quantity</span>
+
               <span>
                 <img src="/images/footprint.png" alt="" />
-                picker
-              </span>
-              <span>
-                <img src="/images/footprint.png" alt="" />
-                the best
+                The Best choose
               </span>
             </div>
             {/* <!-- big foot print --> */}

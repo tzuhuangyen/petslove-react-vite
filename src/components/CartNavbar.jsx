@@ -1,6 +1,5 @@
 import React from "react";
 import { useContext } from "react";
-
 import { CiShoppingCart } from "react-icons/ci";
 import { CartContext } from "../Store";
 
