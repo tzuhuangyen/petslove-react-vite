@@ -9,6 +9,7 @@
 
 ### skills
 * React JS
+* Vite
 * Router
 * AOS - Animate On Scroll
 * SCSS Bootstrap
