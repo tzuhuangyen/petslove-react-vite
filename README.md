@@ -1,8 +1,16 @@
 # React + Vite
 [demo]https://tzuhuangyen.github.io/petslove-react-vite/
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+#Inspiration Source
+##5 dogs & 5cats
+##different food need 
+##costs
+##no preservatives
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+#skills
+##React JS
+##Router
+##AOS - Animate On Scroll
+##SCSS Bootstrap
+##Github/ Vercel
+#
