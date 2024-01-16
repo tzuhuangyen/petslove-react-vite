@@ -68,7 +68,10 @@ function Cart() {
                       })}
                     </select>
                   </td>
-                  <td className="text-end"> €{item.price * item.quantity}</td>
+                  <td className="text-end">
+                    {" "}
+                    €{parseFloat(item.price) * parseInt(item.quantity)}
+                  </td>
                 </tr>
               );
             })}

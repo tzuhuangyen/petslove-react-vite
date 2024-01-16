@@ -115,32 +115,11 @@
       "total": 20
     },
     {
-      "productName": "beef 2",
+      "productName": "pork 3",
       "quantity": 1,
-      "price": 12.99,
-      "total": 12.99,
-      "id": "EFHgtj4"
-    },
-    {
-      "productName": "beef 2",
-      "quantity": 1,
-      "price": 12.99,
-      "total": 12.99,
-      "id": "A7DCfSq"
-    },
-    {
-      "productName": "beef 2",
-      "quantity": 1,
-      "price": 12.99,
-      "total": 12.99,
-      "id": "wMbnBn7"
-    },
-    {
-      "productName": "beef 2",
-      "quantity": 1,
-      "price": 12.99,
-      "total": 12.99,
-      "id": "e2sb05p"
+      "price": 8.49,
+      "total": 8.49,
+      "id": "uuFFKAu"
     }
   ]
 }
