@@ -1,7 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import { CiShoppingCart } from "react-icons/ci";
-import { CartContext } from "../Store";
+import { CartContext } from "./Context";
 
 function CartNavbar() {
   const { state } = useContext(CartContext);

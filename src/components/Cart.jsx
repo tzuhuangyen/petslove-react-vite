@@ -1,7 +1,7 @@
 //product page's cart component
 import React from "react";
 import { useContext } from "react";
-import { CartContext } from "../Store";
+import { CartContext } from "./Context";
 
 function Cart() {
   const contextValue = useContext(CartContext);

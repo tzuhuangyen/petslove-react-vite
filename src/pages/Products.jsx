@@ -5,7 +5,7 @@ import { CiShoppingCart } from "react-icons/ci";
 import { MdFavoriteBorder } from "react-icons/md";
 import CartNavbar from "../components/CartNavbar";
 import Cart from "../components/Cart";
-import { CartContext } from "../Store";
+import { CartContext } from "../components/Context";
 
 const cartReducer = (state, action) => {
   const { cartList } = state;
@@ -18,7 +18,7 @@ const cartReducer = (state, action) => {
   switch (action.type) {
     case "ADD_TO_CART":
       console.log("action:", action);
-      //if no item in the cart
+      //if no item in the cartList, add to cart list
       if (index === -1) {
         // cartList.push(action.payload);
         // Use concat or spread operator to create a new array
@@ -54,6 +54,8 @@ const cartReducer = (state, action) => {
         };
       } else {
         // If item already exists, update its quantity
+        //在卡片內加入購物車按鈕可觸發 找到購物車的index去變更數量
+        //如是在購物車內變更數量也可觸發
         updatedCartList = [...cartList];
         updatedCartList[index].quantity += action.payload.quantity;
         updatedCartList[index].quantity += action.payload.quantity;

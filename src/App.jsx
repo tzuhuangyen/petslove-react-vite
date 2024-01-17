@@ -10,8 +10,9 @@ import Products from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
 import Favorite from "./pages/Favorite";
 import SubscriptionForm from "./pages/SubscriptionForm";
-import Login from "./pages/member/Login";
-import SignUp from "./pages/member/SignUp";
+// import User from "./pages/user/User";
+import Login from "./pages/user/Login";
+import SignUp from "./pages/user/SignUp";
 import Footer from "./components/Footer";
 function App() {
   return (
@@ -28,7 +29,8 @@ function App() {
 
         <Route path="/productDetail" element={<ProductDetail />} />
         <Route path="/favorite" element={<Favorite />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/user" element={<Login />} />
+
         <Route path="/signup" element={<SignUp />} />
         <Route path="/subscriptionForm" element={<SubscriptionForm />} />
       </Routes>

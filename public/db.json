@@ -113,20 +113,6 @@
       "quantity": "1",
       "price": 10,
       "total": 20
-    },
-    {
-      "productName": " chicken 1",
-      "quantity": 1,
-      "price": 10.99,
-      "total": 10.99,
-      "id": "72fz10f"
-    },
-    {
-      "productName": "beef 2",
-      "quantity": 1,
-      "price": 12.99,
-      "total": 12.99,
-      "id": "mGsTGC2"
     }
   ]
 }
